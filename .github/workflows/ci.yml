@@ -1,0 +1,85 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend:
+    name: Backend (typecheck, lint, tests, build)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    services:
+      # Real PostgreSQL 16 with pgvector: concurrency, exclusion constraints and vector search
+      # must be tested on the real thing, never on mocks.
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: parkgrid
+          POSTGRES_PASSWORD: parkgrid
+          POSTGRES_DB: parkgrid
+        ports:
+          - 54329:5432
+        options: >-
+          --health-cmd "pg_isready -U parkgrid -d parkgrid"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+    env:
+      DATABASE_URL: postgres://parkgrid:parkgrid@localhost:54329/parkgrid
+      JWT_ACCESS_SECRET: ci-only-secret-ci-only-secret-ci-only-1234
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+      - run: npm ci
+      - name: Typecheck, lint, tests (incl. migration up/down and the 25-parallel double-booking test), build
+        run: npm run ci
+      - name: Retrieval evaluation (hit@k, out-of-scope and prompt-injection rejection)
+        run: |
+          npm run migrate
+          npm run seed
+          npm run rag:eval
+      - name: Dependency audit (fail on high/critical in production dependencies)
+        run: npm audit --omit=dev --audit-level=high
+
+  frontend:
+    name: Frontend (typecheck, lint, build)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm run build
+        env:
+          VITE_API_URL: https://api.example.invalid
+      - name: No secrets or server-only code in the browser bundle
+        run: |
+          ! grep -R --include='*.js' -l 'RAZORPAY_KEY_SECRET\|OPENAI_API_KEY\|JWT_ACCESS_SECRET' .output/public || (echo "secret name found in client bundle" && exit 1)
+
+  docker:
+    name: Backend image builds
+    runs-on: ubuntu-latest
+    needs: backend
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t parkgrid-backend:ci backend

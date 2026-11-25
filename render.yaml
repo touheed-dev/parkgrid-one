@@ -1,0 +1,39 @@
+# Render blueprint for the free demo API. The database lives on Neon (free), not on Render.
+# Secrets marked sync:false are entered once in the Render dashboard (never committed).
+services:
+  - type: web
+    name: parkgrid-api
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: TRUST_PROXY
+        value: "1"
+      - key: DATABASE_URL        # Neon connection string, must end with ?sslmode=require
+        sync: false
+      - key: DATABASE_SSL
+        value: "true"
+      - key: DB_POOL_MAX
+        value: "5"
+      - key: JWT_ACCESS_SECRET
+        generateValue: true
+      - key: CRON_SECRET
+        generateValue: true
+      - key: CORS_ORIGINS        # your deployed web app origin, e.g. https://parkgrid.example.workers.dev
+        sync: false
+      - key: APP_URL
+        sync: false
+      - key: PAYMENT_PROVIDER    # keep "mock": visitors can try the whole flow with no real money
+        value: mock
+      - key: BOOTSTRAP_ON_BOOT
+        value: "true"
+      - key: DEMO_SEED
+        value: "true"
+      - key: DEMO_PASSWORD
+        sync: false
+      - key: GROQ_API_KEY        # optional, free: https://console.groq.com
+        sync: false
