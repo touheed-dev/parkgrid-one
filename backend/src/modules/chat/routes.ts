@@ -21,6 +21,7 @@ const MAX_MESSAGES = 30;
 const MAX_USER_CHARS = 2000;
 const REQUEST_TIMEOUT_MS = 45_000;
 const MAX_OUTPUT_TOKENS = 450;
+const LEVELS = ["B2", "B1", "G1", "L1", "L2"] as const;
 
 const bodySchema = z.object({
   messages: z
@@ -85,9 +86,14 @@ function liveTools(userId: string) {
   return {
     get_live_availability: tool({
       description:
-        "Live number of free parking slots for the next hour. Leave `level` empty for the WHOLE facility (default); set it only when the user names a specific level (B2, B1, G1, L1, L2).",
-      inputSchema: z.object({ level: z.enum(["B2", "B1", "G1", "L1", "L2"]).optional() }),
-      execute: async ({ level }) => tools.getLiveAvailability(level),
+        "Live number of free parking slots for the next hour. Omit `level` for the WHOLE facility (default); set it only when the user names a specific level (B2, B1, G1, L1, L2).",
+      // Deliberately a loose string: some models send "" or "all" instead of omitting the field, and a strict
+      // enum makes the provider reject the whole tool call. Unknown values fall back to the whole facility.
+      inputSchema: z.object({ level: z.string().optional() }),
+      execute: async ({ level }) => {
+        const wanted = level?.trim().toUpperCase();
+        return tools.getLiveAvailability(LEVELS.find((l) => l === wanted));
+      },
     }),
     get_pricing: tool({
       description: "Current hourly tariff, GST, booking limits and cancellation/refund policy.",

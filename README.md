@@ -34,7 +34,26 @@ The API runs on a free tier and sleeps when idle, so the **first load can take 3
 
 The password is whatever `DEMO_PASSWORD` was set to on the server.
 
-<!-- Add screenshots: docs/img/booking.png, gate.png, admin.png -->
+## Screenshots
+
+<p align="center">
+  <img src="docs/img/home.png" alt="Home page with live availability" width="100%">
+</p>
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/img/booking.png" alt="3D bay picker with live availability"><br><sub><b>Pick a bay</b>: 3D level map, live availability, price breakdown</sub></td>
+    <td width="50%"><img src="docs/img/checkout.png" alt="Checkout with hold timer"><br><sub><b>Checkout</b>: 10-minute hold, GST breakdown, payment methods</sub></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="docs/img/confirmation.png" alt="Booking confirmation with QR pass"><br><sub><b>Confirmation</b>: GST receipt and an opaque QR pass for the gate</sub></td>
+    <td width="50%"><img src="docs/img/assistant.png" alt="RAG assistant answering with live data"><br><sub><b>AI assistant</b>: grounded answers using live availability and pricing tools</sub></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="docs/img/gate.png" alt="Gate scanner accepting an entry"><br><sub><b>Gate scanner</b>: staff scan the pass, entry is validated and recorded</sub></td>
+    <td width="50%"><img src="docs/img/admin.png" alt="Admin dashboard"><br><sub><b>Admin console</b>: occupancy, sessions, revenue, alerts, audit log</sub></td>
+  </tr>
+</table>
 
 ---
 
