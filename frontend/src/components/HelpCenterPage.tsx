@@ -126,15 +126,15 @@ export function HelpCenterPage() {
       case "Parking":
         return <CarFront className="size-4 shrink-0 text-primary" />;
       case "Booking":
-        return <Ticket className="size-4 shrink-0 text-cyan-400" />;
+        return <Ticket className="size-4 shrink-0 text-primary" />;
       case "Payments":
-        return <CreditCard className="size-4 shrink-0 text-amber-400" />;
+        return <CreditCard className="size-4 shrink-0 text-reserved" />;
       case "Cancellation & Refunds":
-        return <RotateCcw className="size-4 shrink-0 text-rose-400" />;
+        return <RotateCcw className="size-4 shrink-0 text-destructive" />;
       case "EV Charging":
-        return <Zap className="size-4 shrink-0 text-emerald-400" />;
+        return <Zap className="size-4 shrink-0 text-available" />;
       case "Entry & Exit":
-        return <ScanLine className="size-4 shrink-0 text-purple-400" />;
+        return <ScanLine className="size-4 shrink-0 text-primary" />;
       case "Parking AI":
         return <Bot className="size-4 shrink-0 text-primary" />;
       default:
@@ -195,8 +195,8 @@ export function HelpCenterPage() {
 
         {/* ── Hero / Page Header ── */}
         <SpotlightCard
-          spotlightColor="rgba(6, 182, 212, 0.22)"
-          borderColor="rgba(6, 182, 212, 0.45)"
+          spotlightColor="rgba(212, 165, 116, 0.22)"
+          borderColor="rgba(212, 165, 116, 0.45)"
           className="relative mb-10 overflow-hidden rounded-2xl border border-border/80 bg-surface/90 p-6 sm:p-10 shadow-sm"
         >
           <div className="max-w-3xl">
@@ -432,7 +432,7 @@ export function HelpCenterPage() {
                                   className={cn(
                                     "px-1.5 py-0 text-[10px] font-mono",
                                     item.badge.includes("Notice")
-                                      ? "border-amber-500/50 text-amber-500 bg-amber-500/10 font-bold"
+                                      ? "border-reserved/50 text-reserved bg-reserved/10 font-bold"
                                       : "border-primary/40 text-primary bg-primary/5",
                                   )}
                                 >
@@ -450,8 +450,8 @@ export function HelpCenterPage() {
                       <AccordionContent className="px-5 pb-5 pt-2">
                         {/* Important callout alert if applicable */}
                         {item.importantNotice && (
-                          <div className="mb-4 flex items-start gap-3 border-l-2 border-amber-500 bg-amber-500/10 p-3 text-xs leading-relaxed text-amber-200">
-                            <Info className="size-4 shrink-0 text-amber-400" />
+                          <div className="mb-4 flex items-start gap-3 border-l-2 border-reserved bg-reserved/10 p-3 text-xs leading-relaxed text-reserved">
+                            <Info className="size-4 shrink-0 text-reserved" />
                             <div>
                               <strong className="block font-semibold">Important Rule Notice</strong>
                               <span>{item.importantNotice}</span>

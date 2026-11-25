@@ -151,7 +151,7 @@ export function AdminSlotsPage() {
               variant="outline"
               className="gap-1 border-primary/40 bg-primary/10 text-primary text-[10px] font-mono px-2 py-0.5 rounded"
             >
-              <span className="size-1.5 rounded-full bg-emerald-400" />
+              <span className="size-1.5 rounded-full bg-available" />
               Live facility bays
             </Badge>
           </div>
@@ -329,12 +329,12 @@ export function AdminSlotsPage() {
                         <span className="inline-flex items-center gap-1.5 capitalize text-foreground">
                           {slot.slot_type === "ev" ? (
                             <>
-                              <Zap className="size-3 text-cyan-400" />
+                              <Zap className="size-3 text-primary" />
                               EV Charger
                             </>
                           ) : slot.slot_type === "accessible" ? (
                             <>
-                              <span className="text-blue-400 font-bold">♿</span>
+                              <span className="text-primary font-bold">♿</span>
                               Accessible
                             </>
                           ) : (
@@ -349,14 +349,14 @@ export function AdminSlotsPage() {
                         {slot.admin_status === "maintenance" ? (
                           <Badge
                             variant="outline"
-                            className="text-[10px] font-mono uppercase px-2 py-0.5 rounded border-rose-500/40 text-rose-400 bg-rose-500/10"
+                            className="text-[10px] font-mono uppercase px-2 py-0.5 rounded border-destructive/40 text-destructive bg-destructive/10"
                           >
                             Maintenance
                           </Badge>
                         ) : slot.admin_status === "blocked" ? (
                           <Badge
                             variant="outline"
-                            className="text-[10px] font-mono uppercase px-2 py-0.5 rounded border-amber-500/40 text-amber-400 bg-amber-500/10"
+                            className="text-[10px] font-mono uppercase px-2 py-0.5 rounded border-reserved/40 text-reserved bg-reserved/10"
                           >
                             Blocked
                           </Badge>
@@ -364,7 +364,7 @@ export function AdminSlotsPage() {
                           <div className="flex flex-col gap-0.5">
                             <Badge
                               variant="outline"
-                              className="text-[10px] font-mono uppercase px-2 py-0.5 rounded border-blue-500/40 text-blue-400 bg-blue-500/10 w-fit"
+                              className="text-[10px] font-mono uppercase px-2 py-0.5 rounded border-primary/40 text-primary bg-primary/10 w-fit"
                             >
                               Occupied
                             </Badge>
@@ -381,7 +381,7 @@ export function AdminSlotsPage() {
                         ) : (
                           <Badge
                             variant="outline"
-                            className="text-[10px] font-mono uppercase px-2 py-0.5 rounded border-emerald-500/40 text-emerald-400 bg-emerald-500/10"
+                            className="text-[10px] font-mono uppercase px-2 py-0.5 rounded border-available/40 text-available bg-available/10"
                           >
                             Available
                           </Badge>

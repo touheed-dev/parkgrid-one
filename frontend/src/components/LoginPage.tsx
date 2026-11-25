@@ -16,11 +16,10 @@ import {
   User,
   X,
 } from "lucide-react";
-import parkGridLogo from "@/assets/parkgrid-logo.png";
+import parkGridLogo from "@/assets/parkgrid-logo.svg";
 import { soundFX } from "@/components/effects/soundEffects";
-import { Lightspeed } from "@/components/effects/Lightspeed";
 import { AnimatedLogo } from "@/components/animated-logo";
-import { SpotlightCard, Aurora, ClickSpark } from "@/components/react-bits";
+import { SpotlightCard } from "@/components/react-bits";
 import "./LoginPage.css";
 
 interface LoginPageProps {
@@ -194,41 +193,9 @@ export function LoginPage({
 
   return (
     <div className={`login-page-container ${isExiting ? "login-exit-animation" : ""}`}>
-      {/* ── Lightspeed Animated Background (fixed full-screen behind card) ── */}
-      <div
-        className="fixed inset-0 w-screen h-screen z-0 pointer-events-none overflow-hidden"
-        aria-hidden="true"
-      >
-        <Lightspeed
-          primaryColor="#00E5FF"
-          secondaryColor="#0288D1"
-          tertiaryColor="#FF9F1C"
-          speed={0.4}
-          intensity={0.9}
-          opacity={0.8}
-          streakCount={isMobile ? 64 : 96}
-          stretchFactor={1.2}
-          maxFPS={isMobile ? 30 : 45}
-          pauseWhenOffscreen={true}
-          interactionEnabled={false}
-        />
-        {/* Subtle radial dark overlay (vignette) behind card area for high contrast */}
-        <div
-          className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(6,9,19,0.72)_0%,rgba(6,9,19,0.25)_55%,rgba(6,9,19,0.88)_100%)] pointer-events-none"
-          aria-hidden="true"
-        />
-      </div>
-
-      {/* ── Background Aesthetics ── */}
-      <Aurora className="opacity-35 z-0" />
-      <div className="login-grid-bg" aria-hidden="true" />
-      <div className="login-glow-primary" aria-hidden="true" />
-      <div className="login-glow-secondary" aria-hidden="true" />
-      <div className="login-road-stripes" aria-hidden="true" />
-
       {/* ── Main Glassmorphic Login Card ── */}
       <SpotlightCard
-        spotlightColor="rgba(0, 229, 255, 0.22)"
+        spotlightColor="rgba(0, 0, 0, 0)"
         spotlightSize={420}
         borderColor="rgba(0, 229, 255, 0.5)"
         className="login-glass-card border-white/10"
@@ -237,7 +204,7 @@ export function LoginPage({
       >
         {/* Top Branding Header */}
         <div className="text-center mb-6">
-          <div className="inline-flex items-center justify-center p-2 rounded-xl bg-background/60 border border-primary/40 shadow-[0_0_24px_rgba(0,242,254,0.2)] mb-3.5">
+          <div className="inline-flex items-center justify-center p-2 rounded-xl bg-background/60 border border-primary/40 mb-3.5">
             <AnimatedLogo
               src={parkGridLogo}
               alt="ParkGrid"
@@ -251,7 +218,7 @@ export function LoginPage({
             <span className="text-primary font-mono">ParkGrid Secure Access // BKC • Mumbai</span>
           </p>
 
-          <h1 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-white">
+          <h1 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
             {mode === "signin" ? "Welcome back to ParkGrid" : "Create your ParkGrid Account"}
           </h1>
           <p className="mt-1 text-xs text-muted-foreground italic font-mono">
@@ -261,15 +228,15 @@ export function LoginPage({
 
         {/* Success or Error Banners */}
         {errorMessage && (
-          <div className="mb-4 flex items-center gap-2 p-3 text-xs rounded-md bg-rose-500/10 border border-rose-500/30 text-rose-300 animate-in fade-in duration-200">
-            <AlertCircle className="size-4 shrink-0 text-rose-400" />
+          <div className="mb-4 flex items-center gap-2 p-3 text-xs rounded-md bg-destructive/10 border border-destructive/30 text-destructive animate-in fade-in duration-200">
+            <AlertCircle className="size-4 shrink-0 text-destructive" />
             <span>{errorMessage}</span>
           </div>
         )}
 
         {successMessage && (
-          <div className="mb-4 flex items-center gap-2 p-3 text-xs rounded-md bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 animate-in fade-in duration-200">
-            <CheckCircle2 className="size-4 shrink-0 text-emerald-400" />
+          <div className="mb-4 flex items-center gap-2 p-3 text-xs rounded-md bg-available/15 border border-available/40 text-available animate-in fade-in duration-200">
+            <CheckCircle2 className="size-4 shrink-0 text-available" />
             <span className="font-semibold">{successMessage}</span>
           </div>
         )}
@@ -343,7 +310,7 @@ export function LoginPage({
                 <button
                   type="button"
                   onClick={() => setForgotModalOpen(true)}
-                  className="text-[11px] text-cyan-400 hover:text-cyan-300 transition-colors"
+                  className="text-[11px] text-primary hover:text-primary transition-colors"
                 >
                   Forgot password?
                 </button>
@@ -408,7 +375,7 @@ export function LoginPage({
                   type="checkbox"
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
-                  className="size-3.5 rounded border-white/20 bg-background/80 text-primary focus:ring-1 focus:ring-primary accent-cyan-400"
+                  className="size-3.5 rounded border-border bg-background/80 text-primary focus:ring-1 focus:ring-primary accent-primary"
                 />
                 <span>Remember this terminal</span>
               </label>
@@ -419,7 +386,7 @@ export function LoginPage({
                   required
                   checked={agreeTerms}
                   onChange={(e) => setAgreeTerms(e.target.checked)}
-                  className="size-3.5 rounded border-white/20 bg-background/80 text-primary focus:ring-1 focus:ring-primary accent-cyan-400"
+                  className="size-3.5 rounded border-border bg-background/80 text-primary focus:ring-1 focus:ring-primary accent-primary"
                 />
                 <span>Agree to ParkGrid Terms &amp; Privacy Policy</span>
               </label>
@@ -427,26 +394,26 @@ export function LoginPage({
           </div>
 
           {/* Primary Submit Button */}
-          <ClickSpark sparkColor="#00f2fe" sparkRadius={26} className="w-full">
+          <div className="w-full">
             <button type="submit" disabled={isLoading} className="login-submit-btn mt-4">
               {isLoading && loadingMethod === "email" ? (
                 <>
-                  <RefreshCw className="size-4 animate-spin text-slate-900" />
+                  <RefreshCw className="size-4 animate-spin text-primary-foreground" />
                   <span>Authenticating with ParkGrid Hub...</span>
                 </>
               ) : mode === "signin" ? (
                 <>
-                  <span className="font-semibold text-slate-950">Login to ParkGrid</span>
-                  <ArrowRight className="size-4 text-slate-950" />
+                  <span className="font-semibold text-primary-foreground">Login to ParkGrid</span>
+                  <ArrowRight className="size-4 text-primary-foreground" />
                 </>
               ) : (
                 <>
-                  <span className="font-semibold text-slate-950">Create Account</span>
-                  <ShieldCheck className="size-4 text-slate-950" />
+                  <span className="font-semibold text-primary-foreground">Create Account</span>
+                  <ShieldCheck className="size-4 text-primary-foreground" />
                 </>
               )}
             </button>
-          </ClickSpark>
+          </div>
         </form>
 
         {/* 256-bit encrypted label */}
@@ -465,7 +432,7 @@ export function LoginPage({
                   setMode("signup");
                   setErrorMessage(null);
                 }}
-                className="text-cyan-400 hover:text-cyan-300 font-medium underline underline-offset-4 transition-colors"
+                className="text-primary hover:text-primary font-medium underline underline-offset-4 transition-colors"
               >
                 Sign up
               </button>
@@ -479,7 +446,7 @@ export function LoginPage({
                   setMode("signin");
                   setErrorMessage(null);
                 }}
-                className="text-cyan-400 hover:text-cyan-300 font-medium underline underline-offset-4 transition-colors"
+                className="text-primary hover:text-primary font-medium underline underline-offset-4 transition-colors"
               >
                 Sign in
               </button>
@@ -490,21 +457,21 @@ export function LoginPage({
 
       {/* ── Forgot Password Dialog ── */}
       {forgotModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md">
-          <div className="w-full max-w-sm p-6 bg-slate-900 border border-cyan-500/30 rounded-xl shadow-2xl animate-in zoom-in-95 duration-150">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-foreground/40">
+          <div className="w-full max-w-sm p-6 bg-card border border-primary/30 rounded-xl shadow-2xl animate-in zoom-in-95 duration-150">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-display text-lg font-semibold text-white">Reset Password</h3>
+              <h3 className="font-display text-lg font-semibold text-foreground">Reset Password</h3>
               <button
                 type="button"
                 onClick={() => setForgotModalOpen(false)}
-                className="text-muted-foreground hover:text-white"
+                className="text-muted-foreground hover:text-foreground"
               >
                 <X className="size-4" />
               </button>
             </div>
 
             {forgotSent ? (
-              <div className="p-4 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs">
+              <div className="p-4 rounded-md bg-available/10 border border-available/30 text-available text-xs">
                 Password recovery instructions have been sent to <strong>{forgotEmail}</strong>.
                 Please check your inbox.
               </div>
@@ -521,20 +488,20 @@ export function LoginPage({
                     value={forgotEmail}
                     onChange={(e) => setForgotEmail(e.target.value)}
                     placeholder="you@example.com"
-                    className="w-full px-3 py-2 text-sm bg-slate-950 border border-white/20 rounded-md text-white focus:outline-none focus:border-cyan-400"
+                    className="w-full px-3 py-2 text-sm bg-background border border-border rounded-md text-foreground focus:outline-none focus:border-primary"
                   />
                 </div>
                 <div className="flex justify-end gap-2 pt-2">
                   <button
                     type="button"
                     onClick={() => setForgotModalOpen(false)}
-                    className="px-3 py-1.5 text-xs text-muted-foreground hover:text-white"
+                    className="px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="px-4 py-1.5 text-xs font-semibold bg-cyan-400 text-slate-950 rounded-md hover:bg-cyan-300"
+                    className="px-4 py-1.5 text-xs font-semibold bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
                   >
                     Send Reset Link
                   </button>

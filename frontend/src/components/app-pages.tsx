@@ -77,10 +77,8 @@ import {
   BlurText,
   SplitText,
   CountUp,
-  Squares,
   StarBorder,
   TiltedCard,
-  Aurora,
   ClickSpark,
 } from "@/components/react-bits";
 import {
@@ -102,14 +100,6 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-/** Inline replay helper — avoids statically importing the 24 KB OpeningAnimation module */
-function replayParkingIntro() {
-  if (typeof window !== "undefined") {
-    sessionStorage.removeItem("parkgrid_seen_intro");
-    window.dispatchEvent(new CustomEvent("replay-parking-intro"));
-  }
-}
-
 import { ThemeSelector } from "@/components/ThemeSelector";
 import { FAQ_CATEGORIES, FAQ_DATABASE, RAG_DOCUMENTS, type FAQCategory } from "@/lib/faq-rag-data";
 import { useForm } from "react-hook-form";
@@ -203,17 +193,6 @@ export function HomePage() {
           className="absolute inset-0 size-full object-cover"
         />
         <div className="hero-scrim absolute inset-0" />
-        <Aurora className="opacity-30 z-0" />
-        <div className="absolute inset-0 z-[1] pointer-events-none opacity-45 mix-blend-screen">
-          <Squares
-            direction="diagonal"
-            speed={0.4}
-            squareSize={48}
-            borderColor="rgba(6, 182, 212, 0.12)"
-            hoverFillColor="rgba(6, 182, 212, 0.25)"
-            className="size-full"
-          />
-        </div>
         <div className="relative z-10 mx-auto grid w-full max-w-[1440px] gap-10 px-6 pb-12 lg:grid-cols-[1fr_420px] lg:px-10 lg:pb-20">
           <div className="page-reveal max-w-3xl self-end text-hero-foreground">
             <p className="mb-5 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em]">
@@ -224,19 +203,16 @@ export function HomePage() {
               <SplitText text="Smart parking." delay={60} duration={0.6} className="text-white" />
               <br />
               <span className="text-hero-foreground">Simple. Fast.</span>{" "}
-              <span className="text-primary font-bold">Secure.</span>
+              <span className="text-hero-accent font-bold">Secure.</span>
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-7 text-hero-muted sm:text-lg">
               Reserve a verified bay, enter with QR, and park without the search. ParkGrid One
               brings intelligent access, EV charging, and round-the-clock security to BKC, Mumbai.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <ClickSpark sparkColor="#00f2fe" sparkRadius={26}>
+              <ClickSpark sparkColor="#d4a574" sparkRadius={26}>
                 <Link to="/parking">
-                  <Button
-                    size="lg"
-                    className="shadow-[0_0_24px_rgba(6,182,212,0.35)] hover:shadow-[0_0_32px_rgba(6,182,212,0.5)] transition-shadow"
-                  >
+                  <Button size="lg">
                     Book parking <ArrowRight />
                   </Button>
                 </Link>
@@ -249,10 +225,10 @@ export function HomePage() {
             </div>
           </div>
           <SpotlightCard
-            spotlightColor="rgba(6, 182, 212, 0.28)"
+            spotlightColor="rgba(212, 165, 116, 0.28)"
             spotlightSize={500}
-            borderColor="rgba(6, 182, 212, 0.5)"
-            className="page-reveal self-end rounded-2xl border-white/10 bg-surface/75 backdrop-blur-2xl p-6 text-hero-foreground shadow-2xl [animation-delay:180ms]"
+            borderColor="rgba(212, 165, 116, 0.5)"
+            className="page-reveal self-end rounded-xl border-hero-line bg-hero-surface p-6 text-hero-foreground shadow-md [animation-delay:180ms]"
           >
             <div className="flex items-center justify-between">
               <div>
@@ -369,7 +345,7 @@ export function HomePage() {
               copy="Every bay reports its live state. Green spaces are ready now; choose one to begin your booking."
             />
             <div className="mt-7 inline-block">
-              <ClickSpark sparkColor="#00f2fe" sparkRadius={24}>
+              <ClickSpark sparkColor="#d4a574" sparkRadius={24}>
                 <Link to="/parking">
                   <Button className="shadow-sm">
                     View full parking map <ArrowRight />
@@ -409,8 +385,8 @@ export function HomePage() {
               return (
                 <SpotlightCard
                   key={title}
-                  spotlightColor="rgba(6, 182, 212, 0.16)"
-                  borderColor="rgba(6, 182, 212, 0.3)"
+                  spotlightColor="rgba(212, 165, 116, 0.16)"
+                  borderColor="rgba(212, 165, 116, 0.3)"
                   className="group rounded-2xl bg-card/90 p-6 shadow-sm transition-all duration-300 hover:-translate-y-1"
                 >
                   <div className="size-11 rounded-xl bg-primary/10 border border-primary/20 grid place-items-center transition-transform duration-300 group-hover:scale-110">
@@ -738,8 +714,8 @@ function ParkingBooking({ initialSlot }: { initialSlot: ParkingSlotData }) {
         <aside className="space-y-4">
           <SpotlightCard
             key={selected.id}
-            spotlightColor="rgba(6, 182, 212, 0.2)"
-            borderColor="rgba(6, 182, 212, 0.4)"
+            spotlightColor="rgba(212, 165, 116, 0.2)"
+            borderColor="rgba(212, 165, 116, 0.4)"
             className="selection-pulse rounded-2xl border border-border/80 bg-surface/95 p-6 shadow-sm"
           >
             <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
@@ -769,8 +745,8 @@ function ParkingBooking({ initialSlot }: { initialSlot: ParkingSlotData }) {
             </dl>
           </SpotlightCard>
           <SpotlightCard
-            spotlightColor="rgba(6, 182, 212, 0.25)"
-            borderColor="rgba(6, 182, 212, 0.5)"
+            spotlightColor="rgba(212, 165, 116, 0.25)"
+            borderColor="rgba(212, 165, 116, 0.5)"
             className="sticky top-24 rounded-2xl border border-primary/30 bg-primary/5 p-6 shadow-sm backdrop-blur-sm"
           >
             <p className="font-mono text-[10px] uppercase tracking-widest text-primary font-semibold">
@@ -815,8 +791,8 @@ export function FacilitiesPage() {
           return (
             <SpotlightCard
               key={title}
-              spotlightColor="rgba(6, 182, 212, 0.18)"
-              borderColor="rgba(6, 182, 212, 0.35)"
+              spotlightColor="rgba(212, 165, 116, 0.18)"
+              borderColor="rgba(212, 165, 116, 0.35)"
               className="rounded-2xl border border-border/80 bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-1"
             >
               <div className="size-12 rounded-xl bg-primary/10 border border-primary/20 grid place-items-center mb-6">
@@ -1080,7 +1056,7 @@ export function VehiclesPage() {
                     className={cn(
                       "interactive-lift relative rounded-2xl border bg-surface/95 p-6 transition-all duration-200 shadow-sm",
                       isSelected
-                        ? "border-selected ring-2 ring-selected/40 shadow-[0_0_24px_var(--selected-glow)]"
+                        ? "border-selected ring-2 ring-selected/40"
                         : "border-border/80 hover:border-primary/40",
                     )}
                   >
@@ -2088,7 +2064,7 @@ Status: CONFIRMED (PAID)`,
   return (
     <PageFrame eyebrow="Payment successful" title="Booking confirmed">
       <div className="page-reveal mx-auto max-w-3xl rounded-3xl border border-available/30 bg-surface/95 p-6 text-center sm:p-10 shadow-2xl backdrop-blur-xl">
-        <span className="success-check mx-auto grid size-16 place-items-center rounded-full bg-available/15 text-available shadow-[0_0_24px_var(--available)]">
+        <span className="success-check mx-auto grid size-16 place-items-center rounded-full bg-available/15 text-available">
           <Check className="size-8" />
         </span>
         <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
@@ -2175,7 +2151,7 @@ Status: CONFIRMED (PAID)`,
           <CarFront className="car-park-animation size-6 text-primary" />
           <span>Gate</span>
           <ArrowRight className="size-3" />
-          <span className="rounded-lg border border-selected/50 bg-selected/10 px-3.5 py-1.5 font-mono text-sm font-bold text-selected shadow-[0_0_12px_var(--selected-glow)]">
+          <span className="rounded-lg border border-selected/50 bg-selected/10 px-3.5 py-1.5 font-mono text-sm font-bold text-selected">
             {slotCode}
           </span>
         </div>
@@ -2252,7 +2228,7 @@ export function ActiveSessionCard({
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border/40 pb-4">
         <div className="flex items-center gap-2.5">
           <span className="live-dot" />
-          <span className="font-mono text-xs font-semibold uppercase tracking-wider text-emerald-400">
+          <span className="font-mono text-xs font-semibold uppercase tracking-wider text-available">
             Active Parking Session
           </span>
         </div>
@@ -2270,7 +2246,7 @@ export function ActiveSessionCard({
           <p
             className={cn(
               "font-display text-5xl sm:text-6xl font-bold tracking-tight tabular-nums",
-              isOverstay ? "text-amber-400" : "text-foreground",
+              isOverstay ? "text-reserved" : "text-foreground",
             )}
           >
             {isOverstay ? `+${formatHMS(-remainingSec)}` : formatHMS(remainingSec)}
@@ -2314,8 +2290,8 @@ export function ActiveSessionCard({
           className={cn(
             "rounded-lg border p-4 text-xs space-y-1.5",
             pastGraceSec > 0
-              ? "border-rose-500/40 bg-rose-500/10 text-rose-300"
-              : "border-amber-500/40 bg-amber-500/10 text-amber-300",
+              ? "border-destructive/40 bg-destructive/10 text-destructive"
+              : "border-reserved/40 bg-reserved/10 text-reserved",
           )}
         >
           <div className="flex items-center gap-2 font-semibold">
@@ -2346,7 +2322,7 @@ export function ActiveSessionCard({
                   recorded immediately.
                 </p>
                 {isOverstay && pastGraceSec > 0 && (
-                  <div className="rounded border border-amber-500/30 bg-amber-500/10 p-2.5 text-amber-300">
+                  <div className="rounded border border-reserved/30 bg-reserved/10 p-2.5 text-reserved">
                     <strong>Overstay Notice:</strong> You parked beyond the grace period. An
                     overstay charge of approximately{" "}
                     <strong>{formatPaise(activeSession.overstayPaiseSoFar)}</strong> will be
@@ -2354,7 +2330,7 @@ export function ActiveSessionCard({
                   </div>
                 )}
                 {isOverstay && pastGraceSec === 0 && (
-                  <div className="rounded border border-emerald-500/30 bg-emerald-500/10 p-2.5 text-emerald-400">
+                  <div className="rounded border border-available/30 bg-available/10 p-2.5 text-available">
                     <strong>Grace Period:</strong> You ended within the 15-minute grace window. No
                     overstay fee will be charged!
                   </div>
@@ -2466,7 +2442,7 @@ export function SessionHistorySection() {
                   </td>
                   <td className="p-3 text-right font-bold tabular-nums">
                     {s.overstayTotalPaise > 0 ? (
-                      <span className="text-amber-400">{formatPaise(s.overstayTotalPaise)}</span>
+                      <span className="text-reserved">{formatPaise(s.overstayTotalPaise)}</span>
                     ) : (
                       <span className="text-muted-foreground font-normal">₹0</span>
                     )}
@@ -2573,15 +2549,15 @@ export function BookingsPage() {
     <PageFrame eyebrow="Your parking" title="My bookings">
       {/* Top Banner when session is currently active */}
       {hasActiveSession && tab !== "Active" && (
-        <div className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-xs">
+        <div className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-available/30 bg-available/10 px-4 py-3 text-xs">
           <div className="flex items-center gap-2">
             <span className="live-dot" />
-            <span className="font-medium text-emerald-400">Active parking session in progress</span>
+            <span className="font-medium text-available">Active parking session in progress</span>
           </div>
           <Button
             size="sm"
             variant="outline"
-            className="h-7 text-xs border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/20"
+            className="h-7 text-xs border-available/40 text-available hover:bg-available/20"
             onClick={() => setTab("Active")}
           >
             View Live Session
@@ -2652,13 +2628,13 @@ export function BookingsPage() {
                             className={cn(
                               "rounded-full px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider",
                               b.payment_status === "paid" &&
-                                "border border-emerald-500/30 bg-emerald-500/10 text-emerald-500",
+                                "border border-available/30 bg-available/10 text-available",
                               b.payment_status === "refunded" &&
-                                "border border-blue-500/30 bg-blue-500/10 text-blue-500",
+                                "border border-primary/30 bg-primary/10 text-primary",
                               b.payment_status === "partially_refunded" &&
-                                "border border-amber-500/30 bg-amber-500/10 text-amber-500",
+                                "border border-reserved/30 bg-reserved/10 text-reserved",
                               b.payment_status === "failed" &&
-                                "border border-rose-500/30 bg-rose-500/10 text-rose-500",
+                                "border border-destructive/30 bg-destructive/10 text-destructive",
                               b.payment_status === "pending" &&
                                 "border border-border bg-muted/20 text-muted-foreground",
                             )}
@@ -2739,13 +2715,13 @@ export function BookingsPage() {
                       className={cn(
                         "rounded-full px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider",
                         b.payment_status === "paid" &&
-                          "border border-emerald-500/30 bg-emerald-500/10 text-emerald-500",
+                          "border border-available/30 bg-available/10 text-available",
                         b.payment_status === "refunded" &&
-                          "border border-blue-500/30 bg-blue-500/10 text-blue-500",
+                          "border border-primary/30 bg-primary/10 text-primary",
                         b.payment_status === "partially_refunded" &&
-                          "border border-amber-500/30 bg-amber-500/10 text-amber-500",
+                          "border border-reserved/30 bg-reserved/10 text-reserved",
                         b.payment_status === "failed" &&
-                          "border border-rose-500/30 bg-rose-500/10 text-rose-500",
+                          "border border-destructive/30 bg-destructive/10 text-destructive",
                         b.payment_status === "pending" &&
                           "border border-border bg-muted/20 text-muted-foreground",
                       )}
@@ -2772,7 +2748,7 @@ export function BookingsPage() {
                       {formatPaise(b.total_paise)}
                     </span>
                     {b.status === "cancelled" && b.refund_paise > 0 && (
-                      <span className="font-medium text-emerald-500">
+                      <span className="font-medium text-available">
                         Refund: {formatPaise(b.refund_paise)}
                       </span>
                     )}
@@ -2869,7 +2845,7 @@ export function BookingsPage() {
                     </div>
                     <div className="flex justify-between border-t border-border/60 pt-1.5">
                       <span className="font-medium text-foreground">Refund to be returned:</span>
-                      <strong className="text-emerald-500 font-mono text-sm">
+                      <strong className="text-available font-mono text-sm">
                         {formatPaise(cancelPreview.refund_paise)}
                       </strong>
                     </div>
@@ -2912,8 +2888,8 @@ export function EVPage() {
   return (
     <PageFrame eyebrow="Charge while you park" title="EV charging">
       <SpotlightCard
-        spotlightColor="rgba(16, 185, 129, 0.2)"
-        borderColor="rgba(16, 185, 129, 0.4)"
+        spotlightColor="rgba(212, 165, 116, 0.2)"
+        borderColor="rgba(212, 165, 116, 0.4)"
         className="mb-8 grid gap-6 rounded-2xl border border-ev/30 bg-ev/5 p-7 shadow-sm lg:grid-cols-2"
       >
         <div>
@@ -2935,8 +2911,8 @@ export function EVPage() {
         {chargers.map((c) => (
           <SpotlightCard
             key={c.id}
-            spotlightColor="rgba(16, 185, 129, 0.22)"
-            borderColor="rgba(16, 185, 129, 0.45)"
+            spotlightColor="rgba(212, 165, 116, 0.22)"
+            borderColor="rgba(212, 165, 116, 0.45)"
             className="rounded-2xl border border-border/80 bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-1"
           >
             <div className="flex justify-between items-center">
@@ -3442,7 +3418,7 @@ export function ProfilePage() {
               <>
                 <div className="flex flex-wrap items-center justify-between gap-4">
                   <div className="flex items-center gap-4">
-                    <span className="grid size-16 place-items-center rounded-full bg-primary/10 font-display text-xl font-bold text-primary border border-primary/20 shadow-[0_0_15px_var(--primary-glow)]">
+                    <span className="grid size-16 place-items-center rounded-full bg-primary/10 font-display text-xl font-bold text-primary border border-primary/20">
                       {initials}
                     </span>
                     <div>
@@ -4044,7 +4020,7 @@ export function KnowledgePage() {
           </div>
 
           <div className="border border-border/80 bg-background p-3.5">
-            <strong className="text-cyan-400 block mb-2">🎫 Booking</strong>
+            <strong className="text-primary block mb-2">🎫 Booking</strong>
             <ul className="space-y-1 text-muted-foreground text-[11px]">
               <li>├── Booking Process</li>
               <li>├── Slot Selection</li>
@@ -4055,7 +4031,7 @@ export function KnowledgePage() {
           </div>
 
           <div className="border border-border/80 bg-background p-3.5">
-            <strong className="text-amber-400 block mb-2">💳 Payment</strong>
+            <strong className="text-reserved block mb-2">💳 Payment</strong>
             <ul className="space-y-1 text-muted-foreground text-[11px]">
               <li>├── Pricing &amp; GST (18%)</li>
               <li>├── UPI &amp; Cards Gateway</li>
@@ -4065,7 +4041,7 @@ export function KnowledgePage() {
           </div>
 
           <div className="border border-border/80 bg-background p-3.5">
-            <strong className="text-emerald-400 block mb-2">⚡ EV Charging</strong>
+            <strong className="text-available block mb-2">⚡ EV Charging</strong>
             <ul className="space-y-1 text-muted-foreground text-[11px]">
               <li>├── 60 kW CCS2 &amp; Type-2</li>
               <li>├── Live Bay Availability</li>

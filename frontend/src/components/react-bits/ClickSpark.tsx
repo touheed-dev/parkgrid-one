@@ -20,7 +20,7 @@ export interface ClickSparkProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export function ClickSpark({
   children,
-  sparkColor = "#06b6d4",
+  sparkColor = "#d4a574",
   sparkCount = 8,
   sparkRadius = 24,
   duration = 320,

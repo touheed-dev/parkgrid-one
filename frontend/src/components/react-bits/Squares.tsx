@@ -15,7 +15,7 @@ export function Squares({
   speed = 0.5,
   borderColor = "rgba(255, 255, 255, 0.06)",
   squareSize = 48,
-  hoverFillColor = "rgba(6, 182, 212, 0.18)",
+  hoverFillColor = "rgba(212, 165, 116, 0.18)",
   className = "",
 }: SquaresProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);

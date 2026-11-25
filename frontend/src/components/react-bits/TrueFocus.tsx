@@ -18,7 +18,7 @@ export function TrueFocus({
   manualMode = false,
   blurAmount = 4,
   borderColor = "oklch(0.69 0.15 190)",
-  glowColor = "rgba(6, 182, 212, 0.4)",
+  glowColor = "rgba(212, 165, 116, 0.4)",
   animationDuration = 0.5,
   pauseBetweenAnimations = 1.2,
   className = "",

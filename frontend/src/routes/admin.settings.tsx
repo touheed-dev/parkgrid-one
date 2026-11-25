@@ -353,31 +353,27 @@ function AdminSettingsPage() {
     switch (action) {
       case "update_settings":
         return (
-          <Badge className="bg-amber-500/15 text-amber-400 border-amber-500/30">
-            update_settings
-          </Badge>
+          <Badge className="bg-reserved/15 text-reserved border-reserved/30">update_settings</Badge>
         );
       case "update_slot_rates":
         return (
-          <Badge className="bg-emerald-500/15 text-emerald-400 border-emerald-500/30">
+          <Badge className="bg-available/15 text-available border-available/30">
             update_slot_rates
           </Badge>
         );
       case "override_booking":
         return (
-          <Badge className="bg-purple-500/15 text-purple-400 border-purple-500/30">
-            override_booking
-          </Badge>
+          <Badge className="bg-primary/15 text-primary border-primary/30">override_booking</Badge>
         );
       case "refund_payment":
         return (
-          <Badge className="bg-rose-500/15 text-rose-400 border-rose-500/30">refund_payment</Badge>
+          <Badge className="bg-destructive/15 text-destructive border-destructive/30">
+            refund_payment
+          </Badge>
         );
       case "change_user_role":
         return (
-          <Badge className="bg-blue-500/15 text-blue-400 border-blue-500/30">
-            change_user_role
-          </Badge>
+          <Badge className="bg-primary/15 text-primary border-primary/30">change_user_role</Badge>
         );
       default:
         return <Badge variant="secondary">{action}</Badge>;
@@ -444,7 +440,7 @@ function AdminSettingsPage() {
               {areRatesDirty && (
                 <Badge
                   variant="outline"
-                  className="border-amber-500/40 text-amber-400 bg-amber-500/10"
+                  className="border-reserved/40 text-reserved bg-reserved/10"
                 >
                   Unsaved rate changes
                 </Badge>
@@ -503,10 +499,10 @@ function AdminSettingsPage() {
                   <div className="space-y-2 p-4 rounded-xl border border-border/60 bg-surface/40">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <Zap className="size-4 text-emerald-400" />
+                        <Zap className="size-4 text-available" />
                         <span className="text-xs font-semibold">EV Fast-Charging Bay</span>
                       </div>
-                      <Badge variant="outline" className="text-[10px] font-mono text-emerald-400">
+                      <Badge variant="outline" className="text-[10px] font-mono text-available">
                         ev
                       </Badge>
                     </div>
@@ -536,10 +532,10 @@ function AdminSettingsPage() {
                   <div className="space-y-2 p-4 rounded-xl border border-border/60 bg-surface/40">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <CarFront className="size-4 text-cyan-400" />
+                        <CarFront className="size-4 text-primary" />
                         <span className="text-xs font-semibold">Accessible / VIP Bay</span>
                       </div>
-                      <Badge variant="outline" className="text-[10px] font-mono text-cyan-400">
+                      <Badge variant="outline" className="text-[10px] font-mono text-primary">
                         accessible
                       </Badge>
                     </div>
@@ -632,7 +628,7 @@ function AdminSettingsPage() {
                   {isDirty && (
                     <Badge
                       variant="outline"
-                      className="border-amber-500/40 text-amber-400 bg-amber-500/10"
+                      className="border-reserved/40 text-reserved bg-reserved/10"
                     >
                       Unsaved changes ({changedFields.length})
                     </Badge>
@@ -988,8 +984,8 @@ function AdminSettingsPage() {
                     variant="outline"
                     className={
                       settings?.payment_mode === "razorpay"
-                        ? "bg-emerald-500/15 text-emerald-400 border-emerald-500/30 font-mono uppercase"
-                        : "bg-blue-500/15 text-blue-400 border-blue-500/30 font-mono uppercase"
+                        ? "bg-available/15 text-available border-available/30 font-mono uppercase"
+                        : "bg-primary/15 text-primary border-primary/30 font-mono uppercase"
                     }
                   >
                     {settings?.payment_mode || "mock"}
@@ -1027,13 +1023,13 @@ function AdminSettingsPage() {
                   <span className="text-muted-foreground">
                     Cancellation &gt; {form.refund_full_hours}h prior:
                   </span>
-                  <span className="font-semibold text-emerald-400">100% Refund</span>
+                  <span className="font-semibold text-available">100% Refund</span>
                 </div>
                 <div className="flex items-start justify-between py-1.5 border-b border-border/40">
                   <span className="text-muted-foreground">
                     Between {form.refund_partial_minutes}m and {form.refund_full_hours}h:
                   </span>
-                  <span className="font-semibold text-amber-400">
+                  <span className="font-semibold text-reserved">
                     {(form.partial_refund_bps / 100).toFixed(0)}% Refund
                   </span>
                 </div>
@@ -1173,7 +1169,7 @@ function AdminSettingsPage() {
                         {f.oldVal} {f.unit}
                       </span>
                       <ArrowRight className="size-3 text-muted-foreground" />
-                      <span className="text-emerald-400 font-bold">
+                      <span className="text-available font-bold">
                         {f.newVal} {f.unit}
                       </span>
                     </div>
@@ -1252,9 +1248,7 @@ function AdminSettingsPage() {
                       ₹{slotRates ? slotRates.standard_rate_paise / 100 : 50}/hr
                     </span>
                     <ArrowRight className="size-3 text-muted-foreground" />
-                    <span className="text-emerald-400 font-bold">
-                      ₹{ratesForm.standard_rate}/hr
-                    </span>
+                    <span className="text-available font-bold">₹{ratesForm.standard_rate}/hr</span>
                   </div>
                 </div>
 
@@ -1265,7 +1259,7 @@ function AdminSettingsPage() {
                       ₹{slotRates ? slotRates.ev_rate_paise / 100 : 70}/hr
                     </span>
                     <ArrowRight className="size-3 text-muted-foreground" />
-                    <span className="text-emerald-400 font-bold">₹{ratesForm.ev_rate}/hr</span>
+                    <span className="text-available font-bold">₹{ratesForm.ev_rate}/hr</span>
                   </div>
                 </div>
 
@@ -1276,7 +1270,7 @@ function AdminSettingsPage() {
                       ₹{slotRates ? slotRates.accessible_rate_paise / 100 : 50}/hr
                     </span>
                     <ArrowRight className="size-3 text-muted-foreground" />
-                    <span className="text-emerald-400 font-bold">
+                    <span className="text-available font-bold">
                       ₹{ratesForm.accessible_rate}/hr
                     </span>
                   </div>
@@ -1364,7 +1358,7 @@ function AdminSettingsPage() {
                   <div className="font-semibold text-primary text-[11px] uppercase tracking-wider">
                     New State (new_data)
                   </div>
-                  <pre className="p-3 rounded-lg bg-surface border border-border/60 text-[10px] font-mono overflow-x-auto text-emerald-400">
+                  <pre className="p-3 rounded-lg bg-surface border border-border/60 text-[10px] font-mono overflow-x-auto text-available">
                     {JSON.stringify(selectedAuditLog.new_data, null, 2)}
                   </pre>
                 </div>

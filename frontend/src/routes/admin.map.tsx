@@ -36,31 +36,31 @@ const STATUS_CONFIG: Record<
 > = {
   active: {
     label: "Available",
-    bg: "bg-emerald-500/10 hover:bg-emerald-500/20",
-    border: "border-emerald-500/40",
-    text: "text-emerald-400",
-    dot: "bg-emerald-500",
+    bg: "bg-available/10 hover:bg-available/20",
+    border: "border-available/40",
+    text: "text-available",
+    dot: "bg-available",
   },
   occupied: {
     label: "Occupied",
-    bg: "bg-blue-500/10 hover:bg-blue-500/20",
-    border: "border-blue-500/40",
-    text: "text-blue-400",
-    dot: "bg-blue-400",
+    bg: "bg-primary/10 hover:bg-primary/20",
+    border: "border-primary/40",
+    text: "text-primary",
+    dot: "bg-primary",
   },
   maintenance: {
     label: "Maintenance",
-    bg: "bg-rose-500/10 hover:bg-rose-500/20",
-    border: "border-rose-500/40",
-    text: "text-rose-400",
-    dot: "bg-rose-500",
+    bg: "bg-destructive/10 hover:bg-destructive/20",
+    border: "border-destructive/40",
+    text: "text-destructive",
+    dot: "bg-destructive",
   },
   blocked: {
     label: "Blocked",
-    bg: "bg-amber-500/10 hover:bg-amber-500/20",
-    border: "border-amber-500/40",
-    text: "text-amber-400",
-    dot: "bg-amber-400",
+    bg: "bg-reserved/10 hover:bg-reserved/20",
+    border: "border-reserved/40",
+    text: "text-reserved",
+    dot: "bg-reserved",
   },
 };
 
@@ -140,14 +140,14 @@ export function AdminLiveMapPage() {
               className={cn(
                 "gap-1 text-[10px] font-mono px-2 py-0.5 rounded transition-colors",
                 isLive
-                  ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-400"
+                  ? "border-available/40 bg-available/10 text-available"
                   : "border-primary/40 bg-primary/10 text-primary",
               )}
             >
               <span
                 className={cn(
                   "size-1.5 rounded-full",
-                  isLive ? "bg-emerald-400 animate-pulse" : "bg-muted-foreground",
+                  isLive ? "bg-available animate-pulse" : "bg-muted-foreground",
                 )}
               />
               {isLive ? "Live Connected" : "Live facility bays"}
@@ -322,11 +322,11 @@ export function AdminLiveMapPage() {
                       </strong>
                       {slot.slot_type === "ev" ? (
                         <span title="EV Fast Charger">
-                          <Zap className="size-3.5 text-cyan-400" />
+                          <Zap className="size-3.5 text-primary" />
                         </span>
                       ) : slot.slot_type === "accessible" ? (
                         <span
-                          className="text-[10px] text-blue-400 font-mono font-bold"
+                          className="text-[10px] text-primary font-mono font-bold"
                           title="Accessible Priority"
                         >
                           ♿

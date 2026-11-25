@@ -22,7 +22,7 @@ import { peekSession, signOut } from "@/lib/auth/session";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import parkGridLogo from "@/assets/parkgrid-logo.png";
+import parkGridLogo from "@/assets/parkgrid-logo.svg";
 import { AnimatedLogo } from "@/components/animated-logo";
 
 interface NavItem {
@@ -206,7 +206,7 @@ export function AdminLayout({ children }: { children?: React.ReactNode }) {
               </span>
               <Badge
                 variant="outline"
-                className="border-amber-500/40 bg-amber-500/10 text-amber-400 text-[10px] font-mono uppercase px-1.5 py-0 h-5"
+                className="border-reserved/40 bg-reserved/10 text-reserved text-[10px] font-mono uppercase px-1.5 py-0 h-5"
               >
                 Admin
               </Badge>
@@ -247,7 +247,7 @@ export function AdminLayout({ children }: { children?: React.ReactNode }) {
               title={collapsed ? "ParkGrid Console" : undefined}
               className="flex items-center gap-2.5 overflow-hidden group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-md"
             >
-              <div className="grid size-9 shrink-0 place-items-center overflow-hidden rounded-lg border border-primary/30 bg-background shadow-[0_0_12px_var(--primary-glow)]">
+              <div className="grid size-9 shrink-0 place-items-center overflow-hidden rounded-lg border border-primary/30 bg-background">
                 <AnimatedLogo
                   src={parkGridLogo}
                   alt="ParkGrid"
@@ -307,7 +307,7 @@ export function AdminLayout({ children }: { children?: React.ReactNode }) {
                         {!collapsed && <span>{item.label}</span>}
                       </div>
                       {!collapsed && item.badge && (
-                        <span className="rounded bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-[9px] px-1.5 py-0.2">
+                        <span className="rounded bg-available/10 border border-available/30 text-available font-mono text-[9px] px-1.5 py-0.2">
                           {item.badge}
                         </span>
                       )}
@@ -386,7 +386,7 @@ export function AdminLayout({ children }: { children?: React.ReactNode }) {
                               <span>{item.label}</span>
                             </div>
                             {item.badge && (
-                              <span className="rounded bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-[9px] px-1.5 py-0.2">
+                              <span className="rounded bg-available/10 border border-available/30 text-available font-mono text-[9px] px-1.5 py-0.2">
                                 {item.badge}
                               </span>
                             )}

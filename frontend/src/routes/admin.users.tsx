@@ -273,9 +273,9 @@ function AdminUsersPage() {
                           variant="outline"
                           className={`text-[10px] font-mono uppercase px-2 py-0.5 rounded ${
                             u.role === "admin"
-                              ? "border-red-500/40 text-red-400 bg-red-500/10 font-bold"
+                              ? "border-destructive/40 text-destructive bg-destructive/10 font-bold"
                               : u.role === "staff"
-                                ? "border-amber-500/40 text-amber-400 bg-amber-500/10"
+                                ? "border-reserved/40 text-reserved bg-reserved/10"
                                 : "border-border/60 text-muted-foreground bg-muted/30"
                           }`}
                         >
@@ -399,7 +399,7 @@ function AdminUsersPage() {
 
             {/* Warning when selecting or demoting admin */}
             {(targetRole === "admin" || roleModalUser?.role === "admin") && (
-              <div className="p-3 rounded-lg border border-amber-500/30 bg-amber-500/10 flex items-start gap-2.5 text-amber-300">
+              <div className="p-3 rounded-lg border border-reserved/30 bg-reserved/10 flex items-start gap-2.5 text-reserved">
                 <AlertTriangle className="size-4 shrink-0 mt-0.5" />
                 <div className="text-[11px] leading-relaxed">
                   <strong>Privileged Role Notice:</strong> Administrative access grants complete

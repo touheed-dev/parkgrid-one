@@ -13,53 +13,6 @@
   font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
 }
 
-/* ── Modern Architectural Ambient Light (Theme-Aware, No Hairline Grid) ── */
-.login-grid-bg {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image: radial-gradient(circle at 50% 20%, var(--primary-glow) 0%, transparent 65%);
-  opacity: 0.6;
-}
-
-/* Ambient Radial Glows */
-.login-glow-primary {
-  position: absolute;
-  top: -15%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 800px;
-  height: 500px;
-  background: radial-gradient(ellipse, var(--primary-glow) 0%, transparent 75%);
-  pointer-events: none;
-  opacity: 0.8;
-}
-
-.login-glow-secondary {
-  position: absolute;
-  bottom: -20%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 900px;
-  height: 450px;
-  background: radial-gradient(ellipse, var(--primary-glow) 0%, transparent 70%);
-  pointer-events: none;
-  opacity: 0.5;
-}
-
-/* Facility Road Line at Bottom */
-.login-road-stripes {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 120px;
-  background: linear-gradient(to top, var(--primary-glow), transparent);
-  border-top: 1px dashed var(--border);
-  opacity: 0.4;
-  pointer-events: none;
-}
-
 /* Elevated Login Card */
 .login-glass-card {
   position: relative;
@@ -70,9 +23,7 @@
   padding: 2.25rem 2.25rem;
   background: var(--card);
   border: 1px solid var(--border);
-  box-shadow:
-    0 24px 48px -12px rgba(0, 0, 0, 0.4),
-    0 0 24px var(--primary-glow);
+  box-shadow: 0 4px 24px oklch(0.25 0.03 55 / 12%);
   border-radius: var(--radius-xl, 0.75rem);
   animation: loginCardFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
@@ -118,7 +69,7 @@
   border-color: var(--primary);
   color: var(--accent-foreground);
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px var(--primary-glow);
+  
 }
 
 .login-social-btn:focus-visible {

@@ -1,6 +1,8 @@
 <div align="center">
 
-# 🅿️ ParkGrid One
+<img src="frontend/public/favicon.svg" alt="ParkGrid One logo" width="88" height="88">
+
+# ParkGrid One
 
 **A full-stack smart-parking platform: book a bay, pay, get a QR pass, scan in and out, and ask an AI assistant, all backed by PostgreSQL.**
 

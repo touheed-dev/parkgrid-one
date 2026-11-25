@@ -118,13 +118,13 @@ export function ContactSupportPage() {
         );
       case "In Progress":
         return (
-          <Badge className="bg-amber-500/20 text-amber-400 border-amber-500/40 font-mono text-[10px]">
+          <Badge className="bg-reserved/20 text-reserved border-reserved/40 font-mono text-[10px]">
             In Progress
           </Badge>
         );
       case "Resolved":
         return (
-          <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/40 font-mono text-[10px]">
+          <Badge className="bg-available/20 text-available border-available/40 font-mono text-[10px]">
             Resolved
           </Badge>
         );
@@ -141,13 +141,13 @@ export function ContactSupportPage() {
     switch (priority) {
       case "Urgent":
         return (
-          <span className="font-mono text-[10px] text-rose-400 font-bold uppercase">
+          <span className="font-mono text-[10px] text-destructive font-bold uppercase">
             ⚡ Urgent Priority
           </span>
         );
       case "High":
         return (
-          <span className="font-mono text-[10px] text-amber-400 font-semibold uppercase">
+          <span className="font-mono text-[10px] text-reserved font-semibold uppercase">
             ▲ High Priority
           </span>
         );
@@ -167,15 +167,15 @@ export function ContactSupportPage() {
       case "Booking / Parking":
         return <CarFront className="size-4 shrink-0 text-primary" />;
       case "Payment":
-        return <CreditCard className="size-4 shrink-0 text-amber-400" />;
+        return <CreditCard className="size-4 shrink-0 text-reserved" />;
       case "Slot Issue":
-        return <ShieldAlert className="size-4 shrink-0 text-rose-400" />;
+        return <ShieldAlert className="size-4 shrink-0 text-destructive" />;
       case "EV Charging":
-        return <Zap className="size-4 shrink-0 text-emerald-400" />;
+        return <Zap className="size-4 shrink-0 text-available" />;
       case "Entry / Exit":
-        return <Clock className="size-4 shrink-0 text-purple-400" />;
+        return <Clock className="size-4 shrink-0 text-primary" />;
       case "Account":
-        return <User className="size-4 shrink-0 text-blue-400" />;
+        return <User className="size-4 shrink-0 text-primary" />;
       case "Other":
         return <HelpCircle className="size-4 shrink-0 text-muted-foreground" />;
     }
@@ -269,8 +269,8 @@ export function ContactSupportPage() {
         <div className="grid gap-10 lg:grid-cols-[1fr_400px]">
           {/* Left: Support Form */}
           <SpotlightCard
-            spotlightColor="rgba(6, 182, 212, 0.16)"
-            borderColor="rgba(6, 182, 212, 0.35)"
+            spotlightColor="rgba(212, 165, 116, 0.16)"
+            borderColor="rgba(212, 165, 116, 0.35)"
             className="rounded-2xl border border-border/80 bg-surface/90 p-6 sm:p-8 shadow-sm"
           >
             <div className="mb-6 border-b border-border pb-5">
@@ -446,8 +446,8 @@ export function ContactSupportPage() {
           <div className="space-y-6">
             {/* 24/7 Control Room Hub */}
             <SpotlightCard
-              spotlightColor="rgba(6, 182, 212, 0.18)"
-              borderColor="rgba(6, 182, 212, 0.35)"
+              spotlightColor="rgba(212, 165, 116, 0.18)"
+              borderColor="rgba(212, 165, 116, 0.35)"
               className="rounded-2xl border border-border/80 bg-surface/90 p-6 shadow-sm"
             >
               <span className="font-mono text-[10px] uppercase tracking-widest text-primary">
@@ -517,8 +517,8 @@ export function ContactSupportPage() {
 
             {/* AI Assistant Quick Callout */}
             <SpotlightCard
-              spotlightColor="rgba(6, 182, 212, 0.22)"
-              borderColor="rgba(6, 182, 212, 0.45)"
+              spotlightColor="rgba(212, 165, 116, 0.22)"
+              borderColor="rgba(212, 165, 116, 0.45)"
               className="rounded-2xl border border-primary/30 bg-primary/5 p-6 shadow-sm"
             >
               <div className="flex items-center gap-2 text-primary">

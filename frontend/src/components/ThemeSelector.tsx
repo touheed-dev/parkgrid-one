@@ -17,12 +17,8 @@ import { cn } from "@/lib/utils";
  * (CSS vars aren't readable at render time without getComputedStyle).
  */
 const THEME_SWATCHES: Record<ThemeId, [string, string, string]> = {
-  dark: ["#0f172a", "#00f0ff", "#f0f9ff"],
-  light: ["#f8fafc", "#0891b2", "#1e293b"],
-  ocean: ["#09172e", "#38bdf8", "#e0f2fe"],
-  cyber: ["#090d16", "#22c55e", "#f0fdf4"],
-  sunset: ["#1a0b2e", "#f59e0b", "#fefce8"],
-  premium: ["#14120e", "#eab308", "#fefce8"],
+  light: ["#f6f1e7", "#6b4a34", "#3a2c22"],
+  dark: ["#2a2420", "#d4a574", "#efe8da"],
 };
 
 interface ThemeSelectorProps {
@@ -50,12 +46,12 @@ export function ThemeSelector({ className, variant = "dropdown" }: ThemeSelector
               className={cn(
                 "relative flex items-center gap-3.5 rounded-lg border p-3.5 text-left transition-all duration-250",
                 isActive
-                  ? "border-primary bg-primary/10 shadow-[0_0_15px_var(--primary-glow)] ring-1 ring-primary"
+                  ? "border-primary bg-primary/10 ring-1 ring-primary"
                   : "border-border bg-surface hover:border-primary/50 hover:bg-accent/50",
               )}
             >
               <div
-                className="flex size-10 shrink-0 items-center justify-center rounded-md border border-border/80 shadow-inner"
+                className="flex size-10 shrink-0 items-center justify-center rounded-md border border-border/80"
                 style={{ backgroundColor: t.bgColor }}
               >
                 <Icon className="size-5" style={{ color: t.color }} />
@@ -128,7 +124,7 @@ export function ThemeSelector({ className, variant = "dropdown" }: ThemeSelector
         </Button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent align="end" className="w-60 p-1.5 backdrop-blur-xl">
+      <DropdownMenuContent align="end" className="w-60 p-1.5">
         <DropdownMenuLabel className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground px-2 py-1.5">
           Select Theme
         </DropdownMenuLabel>
@@ -171,7 +167,7 @@ export function ThemeSelector({ className, variant = "dropdown" }: ThemeSelector
                   />
                   <span
                     className="size-2.5 rounded-full border border-white/10"
-                    style={{ backgroundColor: accentSwatch, boxShadow: `0 0 4px ${accentSwatch}` }}
+                    style={{ backgroundColor: accentSwatch }}
                   />
                   <span
                     className="size-2.5 rounded-full border border-white/10"

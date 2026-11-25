@@ -48,7 +48,7 @@ export function NavigationProgress() {
       className="navigation-progress-bar pointer-events-none fixed inset-x-0 top-0 z-[9999] h-[2px] overflow-hidden bg-transparent"
     >
       <div
-        className="h-full bg-primary shadow-[0_0_10px_var(--primary),0_0_3px_var(--primary)] transition-all ease-out"
+        className="h-full bg-primary transition-all ease-out"
         style={{
           width: `${progress}%`,
           transitionDuration: progress === 100 ? "140ms" : "220ms",

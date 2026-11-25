@@ -277,7 +277,7 @@ function AdminRevenuePage() {
         <div className="rounded-xl border border-border bg-surface p-5 shadow-sm">
           <div className="flex items-center justify-between text-muted-foreground">
             <span className="text-xs font-medium">Net Revenue</span>
-            <div className="grid size-7 place-items-center rounded bg-emerald-500/10 text-emerald-400">
+            <div className="grid size-7 place-items-center rounded bg-available/10 text-available">
               <TrendingUp className="size-4" />
             </div>
           </div>
@@ -288,7 +288,7 @@ function AdminRevenuePage() {
             </div>
           ) : (
             <div className="mt-3">
-              <strong className="font-mono text-2xl font-bold text-emerald-400">
+              <strong className="font-mono text-2xl font-bold text-available">
                 {formatPaise(totals.total_net_paise)}
               </strong>
               <p className="mt-1 text-[11px] text-muted-foreground font-mono">
@@ -327,7 +327,7 @@ function AdminRevenuePage() {
         <div className="rounded-xl border border-border bg-surface p-5 shadow-sm">
           <div className="flex items-center justify-between text-muted-foreground">
             <span className="text-xs font-medium">Total Refunds</span>
-            <div className="grid size-7 place-items-center rounded bg-amber-500/10 text-amber-500">
+            <div className="grid size-7 place-items-center rounded bg-reserved/10 text-reserved">
               <RotateCcw className="size-4" />
             </div>
           </div>
@@ -338,7 +338,7 @@ function AdminRevenuePage() {
             </div>
           ) : (
             <div className="mt-3">
-              <strong className="font-mono text-2xl font-bold text-amber-500">
+              <strong className="font-mono text-2xl font-bold text-reserved">
                 {formatPaise(totals.total_refund_paise)}
               </strong>
               <p className="mt-1 text-[11px] text-muted-foreground font-mono">
@@ -388,15 +388,15 @@ function AdminRevenuePage() {
           </div>
           <div className="flex items-center gap-4 text-xs font-mono">
             <div className="flex items-center gap-1.5">
-              <span className="size-2.5 rounded-full bg-cyan-400" />
+              <span className="size-2.5 rounded-full bg-primary" />
               <span>Gross</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <span className="size-2.5 rounded-full bg-emerald-400" />
+              <span className="size-2.5 rounded-full bg-available" />
               <span>Net</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <span className="size-2.5 rounded-full bg-amber-400" />
+              <span className="size-2.5 rounded-full bg-reserved" />
               <span>Refunds</span>
             </div>
           </div>
@@ -416,31 +416,31 @@ function AdminRevenuePage() {
               <AreaChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                 <defs>
                   <linearGradient id="grossGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#22d3ee" stopOpacity={0.3} />
-                    <stop offset="95%" stopColor="#22d3ee" stopOpacity={0} />
+                    <stop offset="5%" stopColor="var(--chart-1)" stopOpacity={0.16} />
+                    <stop offset="95%" stopColor="var(--chart-1)" stopOpacity={0.16} />
                   </linearGradient>
                   <linearGradient id="netGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#34d399" stopOpacity={0.3} />
-                    <stop offset="95%" stopColor="#34d399" stopOpacity={0} />
+                    <stop offset="5%" stopColor="var(--chart-2)" stopOpacity={0.16} />
+                    <stop offset="95%" stopColor="var(--chart-2)" stopOpacity={0.16} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.08)" />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
                 <XAxis
                   dataKey="period"
-                  stroke="rgba(255,255,255,0.4)"
+                  stroke="var(--muted-foreground)"
                   fontSize={11}
                   tickLine={false}
                 />
                 <YAxis
-                  stroke="rgba(255,255,255,0.4)"
+                  stroke="var(--muted-foreground)"
                   fontSize={11}
                   tickLine={false}
                   tickFormatter={(v) => `₹${v}`}
                 />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: "#18181b",
-                    borderColor: "#27272a",
+                    backgroundColor: "var(--card)",
+                    borderColor: "var(--border)",
                     borderRadius: "8px",
                     fontSize: "12px",
                   }}
@@ -449,14 +449,14 @@ function AdminRevenuePage() {
                 <Area
                   type="monotone"
                   dataKey="Gross"
-                  stroke="#22d3ee"
+                  stroke="var(--chart-1)"
                   strokeWidth={2}
                   fill="url(#grossGrad)"
                 />
                 <Area
                   type="monotone"
                   dataKey="Net"
-                  stroke="#34d399"
+                  stroke="var(--chart-2)"
                   strokeWidth={2}
                   fill="url(#netGrad)"
                 />
@@ -503,7 +503,7 @@ function AdminRevenuePage() {
         {/* By Facility Level */}
         <div className="rounded-xl border border-border bg-surface p-4 shadow-sm">
           <div className="flex items-center gap-2 border-b border-border/60 pb-3">
-            <Layers className="size-4 text-cyan-400" />
+            <Layers className="size-4 text-primary" />
             <h4 className="font-display text-sm font-semibold text-foreground">
               Revenue by Floor Level
             </h4>
@@ -535,7 +535,7 @@ function AdminRevenuePage() {
         {/* By Payment Method */}
         <div className="rounded-xl border border-border bg-surface p-4 shadow-sm">
           <div className="flex items-center gap-2 border-b border-border/60 pb-3">
-            <CreditCard className="size-4 text-emerald-400" />
+            <CreditCard className="size-4 text-available" />
             <h4 className="font-display text-sm font-semibold text-foreground">
               By Payment Method
             </h4>
@@ -618,13 +618,13 @@ function AdminRevenuePage() {
                   >
                     <TableCell className="font-bold text-foreground">{p.period_label}</TableCell>
                     <TableCell className="text-center tabular-nums">{p.bookings_count}</TableCell>
-                    <TableCell className="text-center text-amber-500 tabular-nums">
+                    <TableCell className="text-center text-reserved tabular-nums">
                       {p.cancelled_count}
                     </TableCell>
                     <TableCell className="text-right text-foreground tabular-nums">
                       {formatPaise(p.gross_paise)}
                     </TableCell>
-                    <TableCell className="text-right text-amber-500 tabular-nums">
+                    <TableCell className="text-right text-reserved tabular-nums">
                       {p.refund_paise > 0 ? formatPaise(p.refund_paise) : "—"}
                     </TableCell>
                     <TableCell className="text-right text-muted-foreground tabular-nums">
@@ -633,7 +633,7 @@ function AdminRevenuePage() {
                     <TableCell className="text-right text-muted-foreground tabular-nums">
                       {p.overstay_paise > 0 ? formatPaise(p.overstay_paise) : "—"}
                     </TableCell>
-                    <TableCell className="text-right font-bold text-emerald-400 tabular-nums">
+                    <TableCell className="text-right font-bold text-available tabular-nums">
                       {formatPaise(p.net_paise)}
                     </TableCell>
                   </TableRow>

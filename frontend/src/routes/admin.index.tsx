@@ -128,7 +128,7 @@ function AdminDashboardPage() {
             <span className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground">
               Active Sessions
             </span>
-            <span className="flex size-7 items-center justify-center rounded-lg bg-cyan-500/10 text-cyan-400">
+            <span className="flex size-7 items-center justify-center rounded-lg bg-primary/10 text-primary">
               <CarFront className="size-4" />
             </span>
           </div>
@@ -156,7 +156,7 @@ function AdminDashboardPage() {
             <span className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground">
               Today's Net Revenue
             </span>
-            <span className="flex size-7 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-400">
+            <span className="flex size-7 items-center justify-center rounded-lg bg-available/10 text-available">
               <IndianRupee className="size-4" />
             </span>
           </div>
@@ -183,7 +183,7 @@ function AdminDashboardPage() {
             <span className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground">
               Bookings Today
             </span>
-            <span className="flex size-7 items-center justify-center rounded-lg bg-amber-500/10 text-amber-400">
+            <span className="flex size-7 items-center justify-center rounded-lg bg-reserved/10 text-reserved">
               <CalendarDays className="size-4" />
             </span>
           </div>
@@ -198,7 +198,7 @@ function AdminDashboardPage() {
                 <strong className="font-display text-3xl font-bold text-foreground">
                   {kpis?.bookings_today ?? 0}
                 </strong>
-                <span className="text-xs text-amber-400 font-mono">reservations</span>
+                <span className="text-xs text-reserved font-mono">reservations</span>
               </div>
               <p className="mt-1 text-xs text-muted-foreground">Created today in IST</p>
             </>
@@ -233,22 +233,27 @@ function AdminDashboardPage() {
               <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
                 <defs>
                   <linearGradient id="revenue7dGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#10b981" stopOpacity={0.35} />
-                    <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
+                    <stop offset="5%" stopColor="var(--chart-2)" stopOpacity={0.16} />
+                    <stop offset="95%" stopColor="var(--chart-2)" stopOpacity={0.16} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
-                <XAxis dataKey="label" stroke="#71717a" fontSize={11} tickLine={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+                <XAxis
+                  dataKey="label"
+                  stroke="var(--muted-foreground)"
+                  fontSize={11}
+                  tickLine={false}
+                />
                 <YAxis
-                  stroke="#71717a"
+                  stroke="var(--muted-foreground)"
                   fontSize={11}
                   tickLine={false}
                   tickFormatter={(val) => `₹${Math.round(val / 100)}`}
                 />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: "#09090b",
-                    borderColor: "rgba(255,255,255,0.12)",
+                    backgroundColor: "var(--card)",
+                    borderColor: "var(--border)",
                     borderRadius: "8px",
                     fontSize: "12px",
                   }}
@@ -258,7 +263,7 @@ function AdminDashboardPage() {
                   type="monotone"
                   dataKey="net_paise"
                   name="Net Revenue"
-                  stroke="#10b981"
+                  stroke="var(--chart-2)"
                   strokeWidth={2}
                   fillOpacity={1}
                   fill="url(#revenue7dGradient)"
@@ -325,9 +330,9 @@ function AdminDashboardPage() {
                         variant="outline"
                         className={`text-[9px] font-mono py-0 px-1.5 ${
                           b.status === "active"
-                            ? "border-emerald-500/40 text-emerald-400 bg-emerald-500/10"
+                            ? "border-available/40 text-available bg-available/10"
                             : b.status === "confirmed"
-                              ? "border-cyan-500/40 text-cyan-400 bg-cyan-500/10"
+                              ? "border-primary/40 text-primary bg-primary/10"
                               : b.status === "cancelled"
                                 ? "border-destructive/40 text-destructive bg-destructive/10"
                                 : "border-border text-muted-foreground"
@@ -354,7 +359,7 @@ function AdminDashboardPage() {
             </div>
             <span
               className={`size-2 rounded-full inline-block ${
-                alerts.length > 0 ? "bg-amber-500 animate-pulse" : "bg-emerald-500"
+                alerts.length > 0 ? "bg-reserved animate-pulse" : "bg-available"
               }`}
             />
           </div>
@@ -366,7 +371,7 @@ function AdminDashboardPage() {
               ))
             ) : alerts.length === 0 ? (
               <div className="py-8 text-center text-xs text-muted-foreground flex flex-col items-center justify-center gap-2">
-                <CheckCircle2 className="size-6 text-emerald-400" />
+                <CheckCircle2 className="size-6 text-available" />
                 <span>All systems normal. No operational alerts.</span>
               </div>
             ) : (
@@ -380,7 +385,7 @@ function AdminDashboardPage() {
                       isErrorAlert
                         ? "border-destructive/30 bg-destructive/10 text-destructive-foreground"
                         : isWarning
-                          ? "border-amber-500/30 bg-amber-500/10 text-amber-200"
+                          ? "border-reserved/30 bg-reserved/10 text-reserved"
                           : "border-border bg-background/50 text-foreground"
                     }`}
                   >
@@ -389,7 +394,7 @@ function AdminDashboardPage() {
                         {isErrorAlert ? (
                           <AlertTriangle className="size-3.5 text-destructive" />
                         ) : isWarning ? (
-                          <Zap className="size-3.5 text-amber-400" />
+                          <Zap className="size-3.5 text-reserved" />
                         ) : (
                           <Info className="size-3.5 text-primary" />
                         )}

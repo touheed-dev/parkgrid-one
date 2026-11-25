@@ -214,7 +214,7 @@ function AdminPaymentsPage() {
         <div className="rounded-xl border border-border bg-surface p-5 shadow-sm">
           <div className="flex items-center justify-between text-muted-foreground">
             <span className="text-xs font-medium">Net Revenue</span>
-            <div className="grid size-7 place-items-center rounded bg-emerald-500/10 text-emerald-500">
+            <div className="grid size-7 place-items-center rounded bg-available/10 text-available">
               <Sparkles className="size-4" />
             </div>
           </div>
@@ -262,7 +262,7 @@ function AdminPaymentsPage() {
         <div className="rounded-xl border border-border bg-surface p-5 shadow-sm">
           <div className="flex items-center justify-between text-muted-foreground">
             <span className="text-xs font-medium">Total Refunded</span>
-            <div className="grid size-7 place-items-center rounded bg-amber-500/10 text-amber-500">
+            <div className="grid size-7 place-items-center rounded bg-reserved/10 text-reserved">
               <ArrowDownRight className="size-4" />
             </div>
           </div>
@@ -273,7 +273,7 @@ function AdminPaymentsPage() {
             </div>
           ) : (
             <div className="mt-3">
-              <strong className="font-mono text-2xl font-bold text-amber-500">
+              <strong className="font-mono text-2xl font-bold text-reserved">
                 {formatPaise(totals.refundPaise)}
               </strong>
               <p className="mt-1 text-[11px] text-muted-foreground">
@@ -458,7 +458,7 @@ function AdminPaymentsPage() {
                                 title="Copy receipt number"
                               >
                                 {copiedReceipt === p.receipt_number ? (
-                                  <Check className="size-3 text-emerald-500" />
+                                  <Check className="size-3 text-available" />
                                 ) : (
                                   <Copy className="size-3" />
                                 )}
@@ -486,13 +486,13 @@ function AdminPaymentsPage() {
                             className={cn(
                               "inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-mono font-semibold uppercase",
                               p.status === "succeeded" &&
-                                "border border-emerald-500/30 bg-emerald-500/10 text-emerald-500",
+                                "border border-available/30 bg-available/10 text-available",
                               p.status === "failed" &&
                                 "border border-destructive/30 bg-destructive/10 text-destructive",
                               p.status === "refunded" &&
-                                "border border-amber-500/30 bg-amber-500/10 text-amber-500",
+                                "border border-reserved/30 bg-reserved/10 text-reserved",
                               p.status === "partially_refunded" &&
-                                "border border-amber-500/30 bg-amber-500/10 text-amber-500",
+                                "border border-reserved/30 bg-reserved/10 text-reserved",
                             )}
                           >
                             {p.status === "succeeded" && <CheckCircle2 className="size-2.5" />}
@@ -508,7 +508,7 @@ function AdminPaymentsPage() {
                         </td>
                         <td className="px-4 py-3 text-right font-mono tabular-nums">
                           {sumRefunds > 0 ? (
-                            <span className="font-bold text-amber-500">
+                            <span className="font-bold text-reserved">
                               {formatPaise(sumRefunds)}
                             </span>
                           ) : (
@@ -524,7 +524,7 @@ function AdminPaymentsPage() {
                               <Button
                                 variant="outline"
                                 size="sm"
-                                className="h-7 px-2 text-[11px] font-mono text-amber-400 border-amber-500/30 hover:bg-amber-500/10"
+                                className="h-7 px-2 text-[11px] font-mono text-reserved border-reserved/30 hover:bg-reserved/10"
                                 onClick={() => handleOpenRefundModal(p)}
                                 title="Issue administrative refund"
                               >
@@ -651,7 +651,7 @@ function AdminPaymentsPage() {
                 </div>
                 <div className="flex justify-between border-t border-border/50 pt-2 font-mono font-bold text-foreground">
                   <span>Total Transaction Amount:</span>
-                  <span className="text-sm text-emerald-500">
+                  <span className="text-sm text-available">
                     {formatPaise(selectedPayment.amount_paise)}
                   </span>
                 </div>
@@ -674,9 +674,7 @@ function AdminPaymentsPage() {
                         className="flex items-start justify-between rounded border border-border/60 bg-surface p-2.5 font-mono text-[11px]"
                       >
                         <div>
-                          <strong className="text-amber-500">
-                            {formatPaise(ref.amount_paise)}
-                          </strong>
+                          <strong className="text-reserved">{formatPaise(ref.amount_paise)}</strong>
                           <p className="text-[10px] text-muted-foreground mt-0.5">
                             {ref.reason || "Manual refund"}
                           </p>
@@ -699,7 +697,7 @@ function AdminPaymentsPage() {
                   <Button
                     size="sm"
                     variant="outline"
-                    className="text-amber-400 border-amber-500/40 hover:bg-amber-500/10 gap-1.5 h-8 text-xs font-mono"
+                    className="text-reserved border-reserved/40 hover:bg-reserved/10 gap-1.5 h-8 text-xs font-mono"
                     onClick={() => {
                       handleOpenRefundModal(selectedPayment);
                       setSelectedPayment(null);
@@ -733,7 +731,7 @@ function AdminPaymentsPage() {
         <DialogContent className="sm:max-w-md bg-surface border-border">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 text-foreground font-display text-lg">
-              <RotateCcw className="size-5 text-amber-400" />
+              <RotateCcw className="size-5 text-reserved" />
               Administrative Refund
             </DialogTitle>
             <DialogDescription className="text-xs text-muted-foreground">
@@ -756,9 +754,7 @@ function AdminPaymentsPage() {
               </div>
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Remaining Refundable:</span>
-                <strong className="text-emerald-400">
-                  {formatPaise(remainingRefundablePaise)}
-                </strong>
+                <strong className="text-available">{formatPaise(remainingRefundablePaise)}</strong>
               </div>
             </div>
 

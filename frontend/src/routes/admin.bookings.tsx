@@ -400,13 +400,13 @@ function AdminBookingsPage() {
                           variant="outline"
                           className={`text-[10px] font-mono uppercase px-2 py-0.5 rounded ${
                             b.status === "active"
-                              ? "border-emerald-500/40 text-emerald-400 bg-emerald-500/10"
+                              ? "border-available/40 text-available bg-available/10"
                               : b.status === "confirmed"
-                                ? "border-cyan-500/40 text-cyan-400 bg-cyan-500/10"
+                                ? "border-primary/40 text-primary bg-primary/10"
                                 : b.status === "completed"
                                   ? "border-border/60 text-muted-foreground bg-muted/40"
                                   : b.status === "reserved"
-                                    ? "border-amber-500/40 text-amber-400 bg-amber-500/10"
+                                    ? "border-reserved/40 text-reserved bg-reserved/10"
                                     : "border-destructive/40 text-destructive bg-destructive/10"
                           }`}
                         >
@@ -427,7 +427,7 @@ function AdminBookingsPage() {
                             <Button
                               variant="outline"
                               size="sm"
-                              className="h-7 px-2 text-[11px] font-mono text-amber-400 border-amber-500/30 hover:bg-amber-500/10"
+                              className="h-7 px-2 text-[11px] font-mono text-reserved border-reserved/30 hover:bg-reserved/10"
                               onClick={() => {
                                 setOverrideModalBooking(b);
                                 setOverrideAction("cancel_by_policy");
@@ -605,7 +605,7 @@ function AdminBookingsPage() {
                     </span>
                   </div>
                   {bookingDetail.refund_paise > 0 && (
-                    <div className="flex justify-between items-center text-emerald-400 pt-1">
+                    <div className="flex justify-between items-center text-available pt-1">
                       <span>Total Refunded:</span>
                       <span className="font-mono font-bold">
                         {formatPaise(bookingDetail.refund_paise)}
@@ -618,7 +618,7 @@ function AdminBookingsPage() {
                 {!isTerminalStatus(bookingDetail.status) && (
                   <Button
                     variant="outline"
-                    className="w-full text-xs font-mono text-amber-400 border-amber-500/40 hover:bg-amber-500/10 gap-1.5"
+                    className="w-full text-xs font-mono text-reserved border-reserved/40 hover:bg-reserved/10 gap-1.5"
                     onClick={() => {
                       setOverrideModalBooking(bookingDetail);
                       setOverrideAction("cancel_by_policy");
@@ -644,7 +644,7 @@ function AdminBookingsPage() {
         <DialogContent className="sm:max-w-md bg-surface border-border">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 text-foreground font-display text-lg">
-              <AlertTriangle className="size-5 text-amber-400" />
+              <AlertTriangle className="size-5 text-reserved" />
               Override Booking Status
             </DialogTitle>
             <DialogDescription className="text-xs text-muted-foreground">
@@ -706,7 +706,7 @@ function AdminBookingsPage() {
                 <span className="text-muted-foreground text-[11px] font-mono">
                   Calculated Refund:
                 </span>
-                <strong className="font-mono text-sm text-emerald-400 tabular-nums">
+                <strong className="font-mono text-sm text-available tabular-nums">
                   {formatPaise(estimatedRefundPaise)}
                 </strong>
               </div>

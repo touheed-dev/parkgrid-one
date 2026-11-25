@@ -55,8 +55,8 @@ function ResultCard({ outcome }: { outcome: ScanOutcome | null }) {
       className={cn(
         "flex min-h-40 flex-col items-center justify-center gap-2 border-2 p-6 text-center",
         good
-          ? "border-emerald-500 bg-emerald-500/15 text-emerald-300"
-          : "border-red-500 bg-red-500/15 text-red-300",
+          ? "border-available bg-available/15 text-available"
+          : "border-destructive bg-destructive/15 text-destructive",
       )}
     >
       <Icon className="size-12" aria-hidden="true" />
@@ -82,7 +82,7 @@ function ResultCard({ outcome }: { outcome: ScanOutcome | null }) {
         </dl>
       )}
       {outcome.overstay && outcome.overstay.minutes > 0 && (
-        <p className="mt-1 rounded border border-amber-400/50 bg-amber-400/10 px-3 py-1 text-sm text-amber-300">
+        <p className="mt-1 rounded border border-reserved/50 bg-reserved/10 px-3 py-1 text-sm text-reserved">
           Overstay {outcome.overstay.minutes} min · {formatPaise(outcome.overstay.total_paise)} (
           {outcome.overstay.status === "due" ? "collect at gate" : "settled"})
         </p>
@@ -108,7 +108,7 @@ function RecentList({ scans }: { scans: RecentScan[] }) {
               )}
               <span className="font-mono">{s.plate ?? s.reference ?? "—"}</span>
             </span>
-            <span className={cn("font-medium", ok ? "text-emerald-400" : "text-red-400")}>
+            <span className={cn("font-medium", ok ? "text-available" : "text-destructive")}>
               {REASON_LABEL[s.result] ?? s.result}
             </span>
             <span className="font-mono text-muted-foreground">{formatIstTime(s.created_at)}</span>
@@ -233,7 +233,10 @@ export function GatePage() {
 
       <ResultCard outcome={outcome} />
       {error && (
-        <p role="alert" className="border border-red-500/40 bg-red-500/10 p-3 text-sm text-red-300">
+        <p
+          role="alert"
+          className="border border-destructive/40 bg-destructive/10 p-3 text-sm text-destructive"
+        >
           {error}
         </p>
       )}

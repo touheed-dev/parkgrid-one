@@ -6,5 +6,4 @@ export { Squares, type SquaresProps } from "./Squares";
 export { StarBorder, type StarBorderProps } from "./StarBorder";
 export { TiltedCard, type TiltedCardProps } from "./TiltedCard";
 export { TrueFocus, type TrueFocusProps } from "./TrueFocus";
-export { Aurora, type AuroraProps } from "./Aurora";
 export { ClickSpark, type ClickSparkProps } from "./ClickSpark";

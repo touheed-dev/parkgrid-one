@@ -179,14 +179,14 @@ function AdminSessionsPage() {
             <span>Active Now</span>
             <Badge
               variant="outline"
-              className="text-[10px] px-1.5 py-0 border-emerald-500/40 text-emerald-400 bg-emerald-500/10"
+              className="text-[10px] px-1.5 py-0 border-available/40 text-available bg-available/10"
             >
               {activeList.length}
             </Badge>
             {overstayCount > 0 && (
               <Badge
                 variant="outline"
-                className="text-[10px] px-1.5 py-0 border-amber-500/40 text-amber-400 bg-amber-500/10"
+                className="text-[10px] px-1.5 py-0 border-reserved/40 text-reserved bg-reserved/10"
               >
                 {overstayCount} overstay
               </Badge>
@@ -221,7 +221,7 @@ function AdminSessionsPage() {
               </strong>
             </div>
 
-            <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-4 shadow-sm text-amber-400">
+            <div className="rounded-xl border border-reserved/30 bg-reserved/10 p-4 shadow-sm text-reserved">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-medium">Overstaying Vehicles</span>
                 <AlertTriangle className="size-4" />
@@ -233,7 +233,7 @@ function AdminSessionsPage() {
               <span className="text-xs text-muted-foreground font-medium block">
                 Live Overstay Accruals
               </span>
-              <strong className="text-2xl font-bold font-mono text-emerald-400 mt-1 block">
+              <strong className="text-2xl font-bold font-mono text-available mt-1 block">
                 {formatPaise(totalActiveOverstayCharges)}
               </strong>
             </div>
@@ -312,7 +312,7 @@ function AdminSessionsPage() {
                         <TableRow
                           key={s.sessionId}
                           className={`border-border/60 text-xs hover:bg-accent/40 ${
-                            s.isOverstay || s.overstayMinutes > 0 ? "bg-amber-500/[0.04]" : ""
+                            s.isOverstay || s.overstayMinutes > 0 ? "bg-reserved/[0.04]" : ""
                           }`}
                         >
                           <TableCell>
@@ -341,7 +341,7 @@ function AdminSessionsPage() {
                             {s.isOverstay || s.overstayMinutes > 0 ? (
                               <Badge
                                 variant="outline"
-                                className="border-amber-500/40 text-amber-400 bg-amber-500/10 font-mono text-[10px] animate-pulse"
+                                className="border-reserved/40 text-reserved bg-reserved/10 font-mono text-[10px] animate-pulse"
                               >
                                 <AlertTriangle className="size-3 mr-1" />
                                 {s.overstayMinutes}m Overstay
@@ -349,7 +349,7 @@ function AdminSessionsPage() {
                             ) : (
                               <Badge
                                 variant="outline"
-                                className="border-emerald-500/40 text-emerald-400 bg-emerald-500/10 font-mono text-[10px]"
+                                className="border-available/40 text-available bg-available/10 font-mono text-[10px]"
                               >
                                 <CheckCircle2 className="size-3 mr-1" />
                                 On Schedule
@@ -358,7 +358,7 @@ function AdminSessionsPage() {
                           </TableCell>
                           <TableCell className="text-right font-mono font-bold tabular-nums">
                             {s.overstayChargePaise > 0 ? (
-                              <span className="text-amber-400">
+                              <span className="text-reserved">
                                 {formatPaise(s.overstayChargePaise)}
                               </span>
                             ) : (
@@ -550,11 +550,11 @@ function AdminSessionsPage() {
                               variant="outline"
                               className={`text-[10px] font-mono uppercase px-2 py-0.5 rounded ${
                                 s.status === "active"
-                                  ? "border-emerald-500/40 text-emerald-400 bg-emerald-500/10"
+                                  ? "border-available/40 text-available bg-available/10"
                                   : s.status === "completed"
                                     ? "border-border/60 text-muted-foreground bg-muted/40"
                                     : s.status === "auto_ended"
-                                      ? "border-cyan-500/40 text-cyan-400 bg-cyan-500/10"
+                                      ? "border-primary/40 text-primary bg-primary/10"
                                       : "border-destructive/40 text-destructive bg-destructive/10"
                               }`}
                             >
@@ -569,7 +569,7 @@ function AdminSessionsPage() {
                           </TableCell>
                           <TableCell className="text-right font-mono font-bold tabular-nums">
                             {s.overstayTotalPaise > 0 ? (
-                              <span className="text-amber-400">
+                              <span className="text-reserved">
                                 {formatPaise(s.overstayTotalPaise)}
                               </span>
                             ) : (
@@ -624,7 +624,7 @@ function AdminSessionsPage() {
         <AlertDialogContent className="bg-surface border-border">
           <AlertDialogHeader>
             <AlertDialogTitle className="flex items-center gap-2 font-display text-base">
-              <AlertTriangle className="size-4 text-amber-500" />
+              <AlertTriangle className="size-4 text-reserved" />
               End Parking Session
             </AlertDialogTitle>
             <AlertDialogDescription className="text-xs text-muted-foreground">

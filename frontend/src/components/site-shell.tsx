@@ -30,7 +30,7 @@ import {
 } from "@/lib/auth/session";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import parkGridLogo from "@/assets/parkgrid-logo.png";
+import parkGridLogo from "@/assets/parkgrid-logo.svg";
 import { AnimatedLogo } from "@/components/animated-logo";
 import { ThemeSelector } from "@/components/ThemeSelector";
 import { NavigationProgress } from "@/components/navigation-progress";
@@ -41,21 +41,6 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useProfile } from "@/hooks/useProfile";
 import { useUnreadNotificationsCount } from "@/hooks/useNotifications";
 
-/** Lazy-loaded heavy effects — never parsed during the login phase */
-const OpeningAnimation = lazy(() =>
-  import("@/components/effects/OpeningAnimation").then((m) => ({ default: m.OpeningAnimation })),
-);
-const CustomCursor = lazy(() =>
-  import("@/components/effects/CustomCursor").then((m) => ({ default: m.CustomCursor })),
-);
-
-/** Inline replay helper — dispatches the same event OpeningAnimation already listens for */
-function replayParkingIntro() {
-  if (typeof window !== "undefined") {
-    sessionStorage.removeItem("parkgrid_seen_intro");
-    window.dispatchEvent(new CustomEvent("replay-parking-intro"));
-  }
-}
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -86,7 +71,7 @@ export function BrandMark({
 }) {
   return (
     <span className="flex items-center gap-2.5">
-      <span className="grid size-11 sm:size-12 shrink-0 place-items-center overflow-hidden rounded-xl border border-primary/25 bg-background shadow-[0_0_16px_var(--primary-glow)] transition-transform duration-200 hover:scale-[1.03]">
+      <span className="grid size-11 sm:size-12 shrink-0 place-items-center overflow-hidden rounded-xl border border-primary/25 bg-background transition-transform duration-200 hover:scale-[1.03]">
         <AnimatedLogo
           src={parkGridLogo}
           alt="ParkGrid One"
@@ -303,18 +288,10 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <NavigationProgress />
-      <Suspense fallback={null}>
-        <CustomCursor />
-      </Suspense>
-      <Suspense fallback={null}>
-        <OpeningAnimation />
-      </Suspense>
       <header
         className={cn(
           "fixed inset-x-0 top-0 z-50 border-b py-2.5 sm:py-3 transition-colors duration-250",
-          isHomePage && !scrolled
-            ? "border-transparent bg-transparent"
-            : "border-border/80 bg-background/90 shadow-sm backdrop-blur-xl",
+          "border-border bg-background",
         )}
         style={{ viewTransitionName: "site-header" }}
       >
@@ -336,7 +313,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                   className={cn(
                     "relative whitespace-nowrap rounded-md px-2.5 xl:px-3 py-1.5 text-xs font-medium transition-colors duration-200 hover:bg-accent/80 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                     active
-                      ? "text-primary font-semibold after:absolute after:inset-x-2.5 xl:after:inset-x-3 after:bottom-0 after:h-0.5 after:rounded-full after:bg-primary after:shadow-[0_0_8px_var(--primary-glow)]"
+                      ? "text-primary font-semibold after:absolute after:inset-x-2.5 xl:after:inset-x-3 after:bottom-0 after:h-0.5 after:rounded-full after:bg-primary"
                       : "text-muted-foreground",
                   )}
                 >
@@ -350,9 +327,9 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                 to="/admin"
                 aria-current={isActive("/admin") ? "page" : undefined}
                 className={cn(
-                  "relative whitespace-nowrap rounded-md px-2.5 xl:px-3 py-1.5 text-xs font-medium transition-colors duration-200 hover:bg-accent/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring text-amber-400/90 hover:text-amber-300",
+                  "relative whitespace-nowrap rounded-md px-2.5 xl:px-3 py-1.5 text-xs font-medium transition-colors duration-200 hover:bg-accent/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring text-reserved/90 hover:text-reserved",
                   isActive("/admin") &&
-                    "text-amber-400 font-semibold after:absolute after:inset-x-2.5 xl:after:inset-x-3 after:bottom-0 after:h-0.5 after:rounded-full after:bg-amber-400 after:shadow-[0_0_8px_oklch(0.75_0.18_70/40%)]",
+                    "text-reserved font-semibold after:absolute after:inset-x-2.5 xl:after:inset-x-3 after:bottom-0 after:h-0.5 after:rounded-full after:bg-reserved",
                 )}
               >
                 Admin
@@ -364,8 +341,8 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                 to="/gate"
                 aria-current={isActive("/gate") ? "page" : undefined}
                 className={cn(
-                  "relative whitespace-nowrap rounded-md px-2.5 xl:px-3 py-1.5 text-xs font-medium transition-colors duration-200 hover:bg-accent/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring text-emerald-400/90 hover:text-emerald-300",
-                  isActive("/gate") && "text-emerald-400 font-semibold",
+                  "relative whitespace-nowrap rounded-md px-2.5 xl:px-3 py-1.5 text-xs font-medium transition-colors duration-200 hover:bg-accent/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring text-available/90 hover:text-available",
+                  isActive("/gate") && "text-available font-semibold",
                 )}
               >
                 Gate
@@ -412,17 +389,6 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           </nav>
           <div className="flex items-center gap-2">
             <ThemeSelector />
-            {/* Watch Intro – small icon + label near theme switcher */}
-            <Button
-              size="sm"
-              variant="ghost"
-              onClick={replayParkingIntro}
-              title="Watch Opening Intro"
-              className="hidden xl:inline-flex items-center gap-1.5 px-2 text-xs text-muted-foreground hover:text-cyan-400 transition-colors duration-250"
-            >
-              <Sparkles className="size-3.5 text-cyan-400" />
-              <span className="font-mono text-[11px] uppercase tracking-wider">Intro</span>
-            </Button>
             {session ? (
               <>
                 <Link to="/profile" className="hidden sm:block" aria-label="Profile">
@@ -467,7 +433,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                 </Button>
               </Link>
             )}
-            <ClickSpark sparkColor="#00f2fe" sparkRadius={20}>
+            <ClickSpark sparkColor="#d4a574" sparkRadius={20}>
               <Link to="/parking">
                 <Button className="magnetic-cta shadow-sm">
                   Book now{" "}
@@ -525,10 +491,10 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                 to="/admin"
                 aria-current={path.startsWith("/admin") ? "page" : undefined}
                 onClick={() => setOpen(false)}
-                className="mt-1 flex items-center justify-between rounded-lg px-3.5 py-2.5 text-sm font-medium text-amber-400 transition hover:bg-amber-400/10 focus-visible:ring-2 focus-visible:ring-ring"
+                className="mt-1 flex items-center justify-between rounded-lg px-3.5 py-2.5 text-sm font-medium text-reserved transition hover:bg-reserved/10 focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <span>Admin Operations</span>
-                <span className="rounded border border-amber-400/30 bg-amber-400/10 px-1.5 py-0.5 font-mono text-[10px] text-amber-400">
+                <span className="rounded border border-reserved/30 bg-reserved/10 px-1.5 py-0.5 font-mono text-[10px] text-reserved">
                   Admin
                 </span>
               </Link>
@@ -537,7 +503,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
               <Link
                 to="/gate"
                 onClick={() => setOpen(false)}
-                className="mt-1 flex items-center justify-between rounded-lg px-3.5 py-2.5 text-sm font-medium text-emerald-400 transition hover:bg-emerald-400/10 focus-visible:ring-2 focus-visible:ring-ring"
+                className="mt-1 flex items-center justify-between rounded-lg px-3.5 py-2.5 text-sm font-medium text-available transition hover:bg-available/10 focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <span>Gate Scanner</span>
               </Link>
@@ -574,16 +540,6 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
               </span>
               <ThemeSelector className="w-full justify-start rounded-lg border border-border/80 py-2.5 px-3" />
             </div>
-            <button
-              type="button"
-              onClick={() => {
-                setOpen(false);
-                replayParkingIntro();
-              }}
-              className="mt-1 flex items-center gap-2 rounded-lg px-3.5 py-2.5 text-left text-sm text-cyan-400 transition hover:bg-cyan-400/10"
-            >
-              <Sparkles className="size-4" /> Watch Opening Intro
-            </button>
             <div className="my-2 border-t border-border/60 pt-2">
               {session ? (
                 <div className="grid gap-1">
@@ -648,7 +604,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         style={{ viewTransitionName: "ai-floating-trigger" }}
         aria-label="Ask Parking AI"
       >
-        <span className="flex size-12 items-center justify-center rounded-full border border-primary/30 bg-primary text-primary-foreground shadow-[0_8px_32px_var(--primary-glow)] transition group-hover:scale-105 group-focus-visible:ring-2 group-focus-visible:ring-ring sm:size-14">
+        <span className="flex size-12 items-center justify-center rounded-full border border-primary/30 bg-primary text-primary-foreground transition group-hover:scale-105 group-focus-visible:ring-2 group-focus-visible:ring-ring sm:size-14">
           <Bot className="size-6" />
         </span>
         <span className="pointer-events-none absolute right-16 top-1/2 hidden -translate-y-1/2 translate-x-2 whitespace-nowrap rounded-md bg-foreground px-3 py-2 text-xs text-background opacity-0 shadow-lg transition group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100 sm:block">

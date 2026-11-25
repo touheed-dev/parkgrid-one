@@ -7,11 +7,11 @@ export function DemoBadge({ className }: { className?: string }) {
     <Badge
       variant="outline"
       className={cn(
-        "gap-1 border-amber-500/40 bg-amber-500/10 text-amber-400 text-[10px] font-mono px-2 py-0.5 rounded",
+        "gap-1 border-reserved/40 bg-reserved/10 text-reserved text-[10px] font-mono px-2 py-0.5 rounded",
         className,
       )}
     >
-      <Sparkles className="size-2.5 text-amber-400" />
+      <Sparkles className="size-2.5 text-reserved" />
       Demo data
     </Badge>
   );

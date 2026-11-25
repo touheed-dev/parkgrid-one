@@ -31,8 +31,7 @@ const statusClasses: Record<SlotStatus, string> = {
     "border-available/40 bg-available/8 text-available hover:border-available hover:bg-available/15",
   occupied: "border-occupied/35 bg-occupied/8 text-occupied opacity-80",
   reserved: "border-reserved/40 bg-reserved/8 text-reserved opacity-85",
-  selected:
-    "border-selected bg-selected/20 text-selected shadow-[0_0_20px_var(--selected-glow)] ring-2 ring-selected/50",
+  selected: "border-selected bg-selected/20 text-selected ring-2 ring-selected/50",
   maintenance: "border-border/60 bg-muted/40 text-muted-foreground",
   blocked: "border-border/60 bg-muted/40 text-muted-foreground",
 };
@@ -72,12 +71,12 @@ export function StatusBadge({
       label: "Confirmed",
     },
     selected: {
-      bg: "border-selected/40 bg-selected/15 text-selected shadow-[0_0_12px_var(--selected-glow)]",
+      bg: "border-selected/40 bg-selected/15 text-selected",
       dot: "bg-selected",
       label: "Selected",
     },
     active: {
-      bg: "border-primary/40 bg-primary/15 text-primary shadow-[0_0_12px_var(--primary-glow)]",
+      bg: "border-primary/40 bg-primary/15 text-primary",
       dot: "bg-primary",
       label: "Active",
     },
@@ -379,7 +378,7 @@ export function ParkingMap({
           {/* ── Heavy-vehicle notice ── */}
           <div
             role="note"
-            className="flex items-start gap-2.5 rounded-xl border border-amber-500/25 bg-amber-500/10 px-3.5 py-2.5 text-xs text-amber-500"
+            className="flex items-start gap-2.5 rounded-xl border border-reserved/25 bg-reserved/10 px-3.5 py-2.5 text-xs text-reserved"
           >
             <TriangleAlert className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
             <span>

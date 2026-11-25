@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Moon, Sun, Waves, Zap, Sunset, Crown, Palette } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 
-export type ThemeId = "dark" | "light" | "ocean" | "cyber" | "sunset" | "premium";
+export type ThemeId = "light" | "dark";
 
 export interface ThemeConfig {
   id: ThemeId;
@@ -15,63 +15,27 @@ export interface ThemeConfig {
 
 export const THEMES: ThemeConfig[] = [
   {
-    id: "dark",
-    name: "Dark",
-    subtitle: "Midnight Cyan",
-    icon: Moon,
-    color: "#00f0ff",
-    bgColor: "#0f172a",
-    isDark: true,
-  },
-  {
     id: "light",
     name: "Light",
-    subtitle: "Arctic Crisp",
+    subtitle: "Cream & coffee",
     icon: Sun,
-    color: "#0891b2",
-    bgColor: "#f8fafc",
+    color: "#6b4a34",
+    bgColor: "#f6f1e7",
     isDark: false,
   },
   {
-    id: "ocean",
-    name: "Ocean",
-    subtitle: "Sapphire Azure",
-    icon: Waves,
-    color: "#38bdf8",
-    bgColor: "#09172e",
-    isDark: true,
-  },
-  {
-    id: "cyber",
-    name: "Cyber",
-    subtitle: "Electric Lime",
-    icon: Zap,
-    color: "#22c55e",
-    bgColor: "#090d16",
-    isDark: true,
-  },
-  {
-    id: "sunset",
-    name: "Sunset",
-    subtitle: "Twilight Amber",
-    icon: Sunset,
-    color: "#f59e0b",
-    bgColor: "#1a0b2e",
-    isDark: true,
-  },
-  {
-    id: "premium",
-    name: "Premium",
-    subtitle: "Obsidian Gold",
-    icon: Crown,
-    color: "#eab308",
-    bgColor: "#14120e",
+    id: "dark",
+    name: "Dark",
+    subtitle: "Espresso",
+    icon: Moon,
+    color: "#d4a574",
+    bgColor: "#2a2420",
     isDark: true,
   },
 ];
 
 const STORAGE_KEY = "parkgrid-theme";
-const DEFAULT_THEME: ThemeId = "dark";
+const DEFAULT_THEME: ThemeId = "light";
 
 export function getInitialTheme(): ThemeId {
   if (typeof window === "undefined") return DEFAULT_THEME;
